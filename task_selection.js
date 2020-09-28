@@ -1,0 +1,138 @@
+function clear_sel(){
+	document.getElementById('d1').alt = "unchecked"; 
+	document.getElementById('d1').src = "Images/d1.png";
+	document.getElementById('d2').alt = "unchecked";
+	document.getElementById('d2').src = "Images/d2.png";
+	document.getElementById('d3').alt = "unchecked";
+	document.getElementById('d3').src = "Images/d3.png";
+	
+	document.getElementById('s1').alt = "unchecked"; 
+	document.getElementById('s1').src = "Images/s1.png";
+	document.getElementById('s2').alt = "unchecked";
+	document.getElementById('s2').src = "Images/s2.png";
+	document.getElementById('s3').alt = "unchecked";
+	document.getElementById('s3').src = "Images/s3.png";
+
+	document.getElementById('t1').alt = "unchecked"; 
+	document.getElementById('t1').src = "Images/t1.png";
+	document.getElementById('t2').alt = "unchecked";
+	document.getElementById('t2').src = "Images/t2.png";
+	document.getElementById('t3').alt = "unchecked";
+	document.getElementById('t3').src = "Images/t3.png";
+	document.getElementById('t4').alt = "unchecked";
+	document.getElementById('t4').src = "Images/t4.png";	
+}
+
+function image_check(img){
+	if (img.alt == "unchecked"){
+		if ((img.id == "d1") || (img.id == "d2") || (img.id == "d3")){
+			document.getElementById('d1').alt = "unchecked"; 
+			document.getElementById('d1').src = "Images/d1.png";
+			document.getElementById('d2').alt = "unchecked";
+			document.getElementById('d2').src = "Images/d2.png";
+			document.getElementById('d3').alt = "unchecked";
+			document.getElementById('d3').src = "Images/d3.png";			
+		}
+		if ((img.id == "s1") || (img.id == "s2") || (img.id == "s3")){
+			document.getElementById('s1').alt = "unchecked"; 
+			document.getElementById('s1').src = "Images/s1.png";
+			document.getElementById('s2').alt = "unchecked";
+			document.getElementById('s2').src = "Images/s2.png";
+			document.getElementById('s3').alt = "unchecked";
+			document.getElementById('s3').src = "Images/s3.png";			
+		}
+		img.src = "Images/" + img.id + "_checked.png"; 
+		img.alt = "checked"
+	}
+	else{
+		name = "Images/" + img.id + ".png";
+		img.src = "Images/" + img.id + ".png";
+		img.alt = "unchecked"		
+	}
+}
+
+function get_params(){
+	sel_params = []; 
+	for(var i = 0; i < 4; i++){
+		id = "t" + String(i+1);
+		name = document.getElementById(id).alt; 
+		if (document.getElementById(id).alt == "unchecked")
+			sel_params.push(0);
+		else
+			sel_params.push(1); 
+	}
+	
+	speed = -1; 
+	for(var i = 0; i < 3; i++){
+		id = "s" + String(i+1);
+		name = document.getElementById(id).alt; 
+		if (document.getElementById(id).alt == "checked")
+			sel_params.push(i+1);
+	}
+	
+	diff = -1; 
+	for(var i = 0; i < 3; i++){
+		id = "d" + String(i+1);
+		name = document.getElementById(id).alt; 
+		if (document.getElementById(id).alt == "checked")
+			sel_params.push(i+1);
+	}
+	
+	return sel_params; 
+}
+
+function play_sel(){
+	sel_params = get_params();
+	wrapper = document.getElementById('wrapper');
+	wrapper.style.display='none';
+	set_params();
+}
+
+function auto_sel(){
+	sel_params = [Math.round(Math.random()), Math.round(Math.random()), Math.round(Math.random()), Math.round(Math.random()), Math.floor(Math.random() * 3)  + 1, Math.floor(Math.random() * 3)  + 1]; 
+	wrapper = document.getElementById('wrapper');
+	wrapper.style.display='none';
+	set_params();	
+}
+
+
+function tutorial_sel(){
+	pie = document.getElementById('piechart');
+	pie.style.display='none';
+	
+	uix = document.getElementById('ui');
+	uix.style.display='inline-block';
+	document.getElementById('tut').src = "Images/tutorial_1100.png";
+}
+
+function eval_sel(){
+	pie = document.getElementById('piechart');
+	pie.style.display='none';
+	
+	uix = document.getElementById('ui');
+	uix.style.display='inline-block';
+	document.getElementById('tut').src = "Images/evaluate_sel.png";
+	
+}
+
+mycanvas = document.getElementById('mycanvas'); 
+mygame = document.getElementById('game'); 
+var session_scores = [[0,0,0,0,0,0]];  // s1, s3, s3, s4, game, points
+scorec = document.getElementById('score_bar'); 
+scorec.width = mycanvas.width;
+scorec.height = 0.2*mycanvas.height;
+var params = [];
+scores = [0,0,0,0,0,0]; 
+round = 1; 
+
+
+
+
+
+
+
+
+
+
+
+

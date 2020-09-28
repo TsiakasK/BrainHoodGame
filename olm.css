@@ -1,0 +1,114 @@
+.accordion {
+  background-color: #eee;
+  color: black;
+  cursor: pointer;
+  width: 50%;
+  text-align: center;
+  outline: black;
+  font-size: 15px;
+  padding:0;
+  margin:0;   
+}
+
+.panel {
+  padding: 0 10px;
+  display: none;
+  background-color: white;
+  color: black; 
+  width: 110%; 
+  height: 100%; 
+}
+
+.panel2{
+  padding: 0 10px;
+  display: none;
+  background-color: white;
+  color: black; 
+  width: 110%; 
+  height: 100%; 
+}
+
+/* Make sure that padding behaves as expected */
+* {box-sizing:border-box}
+
+/* Container for skill bars */
+.container2 {
+  float: left; 
+  width: 300px;
+}
+
+.containerOLM {
+  position: relative;
+  text-align: left;
+  width: 300px;
+  height: 50px; 
+  display: block; 
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  overflow-y: initial;
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #fefefe; /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:1px 3px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:1px 3px;word-break:normal;}
+.tg .tg-2eiv{background-color:#efefef;border-color:#963400;font-family:"Comic Sans MS", cursive, sans-serif !important;;
+  font-size:13px;text-align:center;vertical-align:middle}
+.tg .tg-bcj3{border-color:#963400;font-family:"Comic Sans MS", cursive, sans-serif !important;;font-size:13px;text-align:center;
+  vertical-align:middle}
+.tg .tg-6cfq{background-color:#efefef;border-color:#963400;font-family:"Comic Sans MS", cursive, sans-serif !important;;
+  font-size:13px;font-weight:bold;text-align:center;vertical-align:middle}
+.tg .tg-3ijk{border-color:#963400;font-family:"Comic Sans MS", cursive, sans-serif !important;;font-size:13px;font-weight:bold;
+  text-align:center;vertical-align:middle}
+
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 10px 20px 20px 20px;
+  border: 1px solid #888;
+  border-color: gray; 
+  height: 90%;
+  width: 80%; 
+  overflow-y: auto;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-10%, -50%);
+  color: black; 
+  width: 100%; 
+  font-size:13px;
+}

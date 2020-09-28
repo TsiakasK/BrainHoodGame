@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BrainHood: Pilot</title>
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+	<link href="style.css" rel="stylesheet">
+	<link href="olm.css" rel="stylesheet">
+	<link href="side.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<style>
+		.mySlides {display:none;}
+	</style>
+</head>
+
+<script type="text/javascript" src="targets.js"></script>
+<body>
+	<span style="font-size:35px;cursor:pointer" onclick="openNav()">&#9776;&nbsp &nbsp &nbsp Welcome to BrainHood!! </span>
+	<br><br>
+	
+	<div id="mySidenav" class="sidenav">
+	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	  <a href="#">Start</a>
+	  <a href="#" onclick="myFunction()" > How to Play</a>
+	  <a href="#">Exit</a>
+	</div>
+
+
+	<div id="wrapper" style="padding-left: 20px;"> 
+		<div id="task_parameters"> 
+			<div id="task_selection">
+				<h3>Choose the game(s) you want to play!</h3>
+				<div class="container">
+					<img id="t1" src="Images/t1.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+					<div class="middle">
+						<div class="text">Move and Shoot!</div>
+					</div>
+				</div>
+				<div class="container">
+					<img id="t2" src="Images/t2.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+					<div class="middle">
+						<div class="text">Avoid the Birds!</div>
+					</div>
+				</div>
+				<div class="container">
+					<img id="t3" src="Images/t3.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+					<div class="middle">
+						<div class="text">Remember Targets!</div>
+					</div>
+				</div>
+				<div class="container">
+					<img id="t4" src="Images/t4.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+					<div class="middle">
+						<div class="text">Switch Targets!</div>
+					</div>
+				</div>
+			</div>
+			<div id="speed_selection">
+				<h3>Choose the targets' speed!</h3>
+				<div class="container">
+					<img id="s1" src="Images/s1.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+					<div class="middle" style= "height: 95%">
+						<div class="text"> Slow </div>
+					</div>
+				</div>
+				<div class="container">
+					<img id="s2" src="Images/s2.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+					<div class="middle" style= "height: 95%">
+						<div class="text"> Medium </div>
+					</div>
+				</div>
+				<div class="container">
+					<img id="s3" src="Images/s3.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+					<div class="middle" style= "height: 95%">
+						<div class="text"> Fast </div>
+					</div>
+				</div>
+			</div>				
+			<div id="difficulty_selection">	
+				<h3>Choose the number of target positions!</h3>
+				<div class="container">
+					<img id="d1" src="Images/d1.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+					<div class="middle">
+						<div class="text"> 3 (Easy)</div>
+					</div>
+				</div>
+				<div class="container">
+					<img id="d2" src="Images/d2.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+					<div class="middle">
+						<div class="text"> 5 (Medium)</div>
+					</div>
+				</div>
+				<div class="container">
+					<img id="d3" src="Images/d3.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+					<div class="middle">
+						<div class="text"> 7 (Hard)</div>
+					</div>
+				</div>
+			</div>
+			<div id = "buttons1" style= " padding-left: 5px; padding-top: 25px">
+				<span class='start-btn' onClick="play_sel();" style= "width: 120px;"> Play!!! </span>
+				<span id= "tutBtn" class='start-btn' style= "width: 120px;"> Rules </span> 
+				<span class='start-btn' onClick="random_sel();" style= "color:  #C70039 ; width: 120px; float: left;"> Exit Game </span>
+			</div>
+			
+		</div>
+		<div id = "buttons" >
+			<h3> View Your Scores!</h1>
+			<!--
+			<span id= "myBtn" class='start-btn' style= "width: 320px;"> Get some help to choose the next task!   </span> <br>
+			<span class='start-btn' onClick="rec_sel();" style= "width: 320px;"> Let BrainHood choose the next one! </span> <br>
+			<br> -->
+			<div class="container">
+				<img id="myBtn" src="Images/openOLM.png" class="image" style="width:100%" >
+				<div class="middle">
+					<div class="text"> View your Scores! </div>
+				</div>
+			</div> 
+			
+			<br><br><br><br><br><br><br><br>
+			
+			<h3> Game Progress</h3>
+			<div id = "screen_rounds">Rounds Played: 0/20</div>				
+			<div id = "screen_score">Total Game Score: 0</div>			
+		</div>		
+		
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
+		
+			<!-- Modal content -->
+			<div class="modal-content">
+				<span id= "close1" class="close" style="position: relative;  ">&times;</span>
+				<div class="container2">
+					<button id= "TotalAccordion" class="accordion" style="height: 50px; width: 400px; "> 
+					<div class="containerOLM"> 
+						<img id="total" src="Images/total.png" style="height: 46px; position: relative;" >
+						<img class = "pscores" id="totalb" src="Images/ptotal.png" style="position: absolute; left: 0px; height: 47px; width: 5px; " >
+						<div id= "tscore_text" class="centered" style="font-size:16px"> My Score </div>
+					</div>
+					</button>
+					<div class="panel" >						
+						<button id = "acc1" class="accordion" style="height: 50px; width: 400px; "> 
+						<div class="containerOLM"> 
+							<img id="score1" src="Images/score1.png" style="height: 46px; position: relative;" >
+							<img class = "pscores" id="score1b" src="Images/pscore1.png" style="position: absolute; left: 0px; height: 47px; width: 5px; " >
+							<div id= "s1_text" class="centered"  > Move and Shoot </div> 
+						</div>
+						</button>
+						<div class="panel2" style="width: 300px;">
+							<div class = "graph" id="olm_chart" style="width: 350px;"></div>
+						</div>
+
+						<button class="accordion" style="height: 50px; width: 400px;"> 
+						<div class="containerOLM"> 
+							<img id="score2" src="Images/score2.png" style="height: 46px; position: relative;" >
+							<img class = "pscores" id="score2b" src="Images/pscore2.png" style="position: absolute; left: 0px; height: 47px; width: 5px; " >
+							<div id= "s2_text" class="centered" > Avoid Birds </div> 
+						</div>
+						</button>
+						<div class="panel2" style="width: 300px;">
+							<div class = "graph" id="olm_chart" style="width: 350px;"></div>
+						</div>
+
+						<button class="accordion" style="height: 50px; width: 400px; "> 
+						<div class="containerOLM"> 
+							<img id="score3" src="Images/score3.png" style="height: 46px; position: relative;" >
+							<img class = "pscores" id="score3b" src="Images/pscore3.png" style="position: absolute; left: 0px; height: 47px; width: 5px; " >
+							<div id= "s3_text" class="centered"  > Remember Targets </div>
+						</div>
+						</button>
+						<div class="panel2" style="width: 300px;">
+							<div class = "graph" id="olm_chart" style="width: 350px;"></div>
+						</div>
+
+						<button class="accordion" style="height: 50px; width: 400px; "> 
+						<div class="containerOLM"> 
+							<img id="score4" src="Images/score4.png" style="height: 46px; position: relative;" >
+							<img class = "pscores" id="score4b" src="Images/pscore4.png" style="position: absolute; left: 0px; height: 47px; width: 5px; " >
+							<div id= "s4_text" class="centered">Switch Targets</div>
+						</div>
+						</button>
+						<div class="panel2" style="width: 300px;">
+							<div class = "graph" id="olm_chart" style="width: 350px;"></div>
+						</div>
+					</div>
+				</div>
+				<div style= "overflow: hidden; float: left; padding-left: 150px; text-align: right; ">					
+					<table class="tg" id="tg-PdFaH" style="undefined;table-layout: float: left; fixed; width: 627px">
+						<colgroup>
+						<col style="width: 80px">
+						<col style="width: 80px">
+						<col style="width: 80px">
+						<col style="width: 80px">
+						<col style="width: 80px">
+						<col style="width: 80px">
+						<col style="width: 80px">
+						<col style="width: 80px">
+						<col style="width: 80px">
+						</colgroup>
+						<tbody>
+						  <tr>
+							<td class="tg-bcj3">Round</td>
+							<td class="tg-6cfq"><img src="Images/t1.png" alt="" height=100% width=100%></img></td>
+							<td class="tg-6cfq"><img src="Images/t2.png" alt="" height=100% width=100%></img></td>
+							<td class="tg-6cfq"><img src="Images/t3.png" alt="" height=100% width=100%></img></td>
+							<td class="tg-6cfq"><img src="Images/t4.png" alt="" height=100% width=100%></img></td>
+							<td class="tg-6cfq"><img src="Images/tspeed.png" alt="" height=100% width=100%></img></td>
+							<td class="tg-6cfq"><img src="Images/tspots.png" alt="" height=100% width=100%></img></td>
+							<td class="tg-6cfq"><img src="Images/tscore.png" alt="" height=100% width=100%></img></td>
+							<td class="tg-6cfq"><img src="Images/tpoints.png" alt="" height=100% width=100%></img></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">1</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">2</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">3</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">4</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">5</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">6</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">7</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">8</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">9</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">10</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">11</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">12</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">13</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">14</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">15</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">16</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">17</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">18</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">19</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						  <tr>
+							<td class="tg-bcj3">20</td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+							<td class="tg-bcj3"></td>
+						  </tr>
+						</tbody>
+					</table>
+				</div>
+				<img id="recc" src="Images/grec.png" style="position: relative; display: none; height: 300px; width: 235px; padding-top: 100px; " >
+			</div>
+		</div>
+		<div id="tutorial" class="modal" >
+			<!-- Modal content -->
+			<div class="modal-content" style="height: 550px; background-color: grey; padding-left: 200px; padding-top: 50px; ">
+				<span class="close">&times;</span>
+				<div id="tutorial_pic" style="width: 80%; height: 100%; text-align: center;  background-size: 100% 100%; background-color: grey; ">
+				</div>
+			</div>
+		</div>
+		<div id="howtoplay" class="modal">
+			<div class="modal-content">
+				<span id= "closeVideo" class="close" onClick="myFunction()" style="display:none;">&times;</span>
+				<video class="popuptext" id="myPopup" style="width:1010px;" >
+					<source src="intro.mp4" type="video/mp4">
+				</video>
+			</div>
+		</div>
+	</div>
+	
+	<div class="w3-content w3-section" style="max-width:350px float: left;position:relative;">
+		<img class="mySlides" src="Images/3.png" style="width:50%">
+		<img class="mySlides" src="Images/2.png" style="width:50%">
+		<img class="mySlides" src="Images/1.png" style="width:50%">
+		<img class="mySlides" src="Images/go.png" style="width:50%">
+		<img class="mySlides" src="Images/go.png" style="width:50%">
+	</div>
+	
+	<div id = "game">
+		<canvas id="score_bar"> </canvas>
+		<canvas id="mycanvas" > </canvas>
+	</div>
+	
+	<script type= "text/javascript" src="task_selection.js"></script>
+	<script type= "text/javascript" src="game.js"></script>
+	<script type= "text/javascript" src= "https://www.gstatic.com/charts/loader.js"> </script>
+	
+	<script>
+	
+	
+	
+	// record task parameters and scores for SLR table
+	table_entry = []; // round ID, T1 ,T2, T3, T4, Speed, Difficulty, Score, Points
+	
+	// SIDE NAVIGATION
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "250px";
+	}
+
+	function closeNav() {
+	document.getElementById("mySidenav").style.width = "0";
+	}
+
+	// video 
+	function myFunction() {
+		closeNav(); 
+		var popup = document.getElementById("myPopup");
+		popup.classList.toggle("show");
+		if (popup.paused){ 
+			popup.play(); 
+			document.getElementById("closeVideo").style.display = "block"; 
+			document.getElementById("howtoplay").style.display = "block";
+			}
+		  else{ 
+			popup.load();
+			document.getElementById("closeVideo").style.display = "none"; 
+			document.getElementById("howtoplay").style.display = "none";
+		} 
+	}
+	
+	// OPEN LEARNER MODEL
+	var acc = document.getElementsByClassName("accordion");
+	for (var i = 0; i < acc.length; i++) { 
+	    acc[i].addEventListener("click", function(){
+			reset_table_background(); 
+			var panel = this.nextElementSibling;
+			if (panel.style.display == "block"){
+				panel.style.display = "none";
+			}else{
+				panel.style.display = "block";
+			}
+			var pans = document.getElementsByClassName("panel2");
+			for (var j = 0; j < pans.length; j++){
+				if (pans[j] === panel && panel.style.display == "block"){
+					highlight_rows(j);
+					drawCurveTypes();
+				}
+				else
+					pans[j].style.display = "none"; 
+			}			
+	  });
+	}
+	
+	function highlight_rows(k){
+		skill2plot = k; 
+		for (var i = 0; i < table_entry.length; i++){
+			if (table_entry[i][k+1] == 1)
+				document.getElementById('tg-PdFaH').rows[parseInt(i+1,10)].style.backgroundColor = "yellow";  
+		}
+	}
+	
+	function reset_table_background(){
+		for (var i = 0; i < table_entry.length; i++){
+				document.getElementById('tg-PdFaH').rows[parseInt(i+1,10)].style.backgroundColor = "white";  
+			}
+	}
+	
+	// Get the modal
+	var modal = document.getElementById("myModal");
+	// Get the tutorial modal 
+	var tut_modal = document.getElementById("tutorial");
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn");
+	// Get the button that opens the tutorial
+	var tut_btn = document.getElementById("tutBtn");
+	var tut_pic = document.getElementById("tutorial_pic");
+	// Get the <span> element that closes the modal
+	var span1 = document.getElementsByClassName("close")[0];
+	var span2 = document.getElementsByClassName("close")[1];
+
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+		var temp = Math.round(scores[5]).toString(); 
+		document.getElementById("tscore_text").innerHTML  = "My Score: " + temp; 
+		document.getElementById("total").width = scores[5];
+		var temp = Math.round(scores[0]).toString(); 
+		document.getElementById("s1_text").innerHTML  = "Move and Shoot: " + temp;
+		document.getElementById("score1").width = scores[0];
+		var temp = Math.round(scores[1]).toString(); 
+		document.getElementById("s2_text").innerHTML  = "Avoid Birds: " + temp;
+		document.getElementById("score2").width = scores[1];
+		var temp = Math.round(scores[2]).toString(); 
+		document.getElementById("s3_text").innerHTML  = "Remember Targets: " + temp;
+		document.getElementById("score3").width = scores[2];
+		var temp = Math.round(scores[3]).toString(); 
+		document.getElementById("s4_text").innerHTML  = "Switch Targets: " + temp;
+		document.getElementById("score4").width = scores[3];
+		
+		modal.style.display = "block";
+	}
+	
+	// When the user clicks the button, open the modal 
+	tut_btn.onclick = function() {
+	  pp = get_params();
+	  var tID = pp.slice(0,4).join(""); 
+	  tut_pic.style.backgroundImage = "url(Images/tutorial_" + tID + ".png)";
+	  tut_modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span1.onclick = function() {
+		modal.style.display = "none";
+		var acc = document.getElementsByClassName("accordion");
+		reset_table_background();
+		for (var i = 0; i < acc.length; i++) 
+			acc[i].nextElementSibling.style.display = "none";
+	}
+	
+	// When the user clicks on <span> (x), close the modal
+	span2.onclick = function() {
+	  tut_modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	//window.onclick = function(event) {
+	//  if (event.target == modal || event.target == tut_modal) {
+	//	modal.style.display = "none";
+	//	tut_modal.style.display = "none";
+	// }
+	//}
+	
+	// OLM plots
+	google.charts.load('current', {packages: ['corechart', 'line']});
+	//google.charts.setOnLoadCallback(drawCurveTypes);
+	function drawCurveTypes() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('number', 'Round');
+		data.addColumn('number', 'Game Score');
+		data.addColumn('number', 'Points Received');
+		
+		var data2plot = []; 
+		for (var i = 0; i < table_entry.length; i++){
+			if (table_entry[i][skill2plot+1] == 1){
+				var tmp = [table_entry[i][0], table_entry[i][7], table_entry[i][8]];
+				data2plot.push(tmp); 
+			}
+		}
+		
+		//data.addRows([
+		//[1, 10, 5],   [2, 23, 15],  [3, 17, 9],   [4, 18, 10],  [5, 9, 5],
+		//[6, 11, 3],   [7, 27, 19],  [8, 33, 25],  [9, 40, 32],  [10, 32, 24], [11, 35, 27],
+		//[12, 30, 22], [13, 40, 32], [14, 42, 34], [15, 47, 39], [16, 44, 36], [17, 48, 40],
+		//[18, 52, 44], [19, 54, 46], [20, 42, 34]
+		//]);
+		
+		data.addRows(data2plot);
+
+		var options = {
+		hAxis: {
+		  title: 'Round'
+		},
+		vAxis: {
+		  title: 'Scores'
+		},
+		
+		chartArea: {
+			// leave room for y-axis labels
+			width: '80%'
+		},
+		legend: {
+			position: 'top'
+		},
+		width: '100%'
+		};
+
+		// for each plot visualize values
+		var ch = document.getElementsByClassName('graph')[skill2plot]; 
+		//for (var i = 0; i < ch.length; i++){
+		var chart = new google.visualization.LineChart(ch);
+		chart.draw(data, options);
+		//}
+    }
+	</script>
+	<div class="form-popup" id="myForm">
+	<form action="#">
+		<h1>Round Finished!!!</h1>
+		<br><br>
+		<b>The task was:  </b> 
+		<input type="checkbox" name="cogparams" value="hec"> Too Easy  
+		<input type="checkbox" name="cogparams" value="ri"> Easy
+		<input type="checkbox" name="cogparams" value="wm"> OK 
+		<input type="checkbox" name="cogparams" value="ts"> Difficult	
+		<input type="checkbox" name="cogparams" value="ts"> Too Difficult
+		<br><br><br>
+		<b>I think that my performance was: </b>
+		<input type="checkbox" name="cogparams" value="hec" checked> Bad  
+		<input type="checkbox" name="cogparams" value="ri"> Not Good
+		<input type="checkbox" name="cogparams" value="wm"> OK 
+		<input type="checkbox" name="cogparams" value="ts"> Pretty Good	
+		<input type="checkbox" name="cogparams" value="ts"> Great
+		<br><br><br>
+		<b>During the task I felt:  </b>
+		<input type="checkbox" name="cogparams" value="hec" checked> Stressed  
+		<input type="checkbox" name="cogparams" value="ri"> Engaged
+		<input type="checkbox" name="cogparams" value="wm"> Bored
+		<br><br><br>		
+		<b>I really liked this task!  </b>
+		<input type="checkbox" name="cogparams" value="hec" checked> Not at all  
+		<input type="checkbox" name="cogparams" value="ri"> Not Sure
+		<input type="checkbox" name="cogparams" value="wm"> Yes
+		<br><br><br>	
+		<b>I did understood the rules!  </b>
+		<input type="checkbox" name="cogparams" value="hec" checked> Not at all  
+		<input type="checkbox" name="cogparams" value="ri"> Not Sure
+		<input type="checkbox" name="cogparams" value="wm"> Yes
+	</form>
+	<br><br>
+    <span class='start-btn' onClick="BackToGame();" width: 160px;"> Next!!! </span>
+	
+	</div>
+	</body>
+</html>

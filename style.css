@@ -1,0 +1,172 @@
+#full{
+	width: 100%; 
+	display: block;
+	position: absolute; 
+}
+
+#wrapper{
+	display: block;
+	position: absolute; 
+}
+
+#task_parameters{
+	display: block;
+	position: relative; 
+	width: 40%; /* full window width */
+	float: left;
+}
+
+#task_selection{
+	display: block;
+	float: left; 
+	width: 80%; /* full window width */
+	position:relative;
+}
+
+#difficulty_selection{
+	display: block;
+	float: left; 
+	width: 90%; /* full window width */
+	position:relative;
+}
+
+#speed_selection{
+	display: block;
+	float: left;
+	width: 85%; /* full window width */
+	position:relative;
+}
+
+#buttons{
+	display: inline-block;
+	position: relative; 
+	width: 50%; /* full window width */
+	float: left; 
+}
+
+#buttons1{
+	display: inline-block;
+	position: relative; 
+	
+}
+
+#sreen-score{
+	display: block;
+	position: relative; 
+	width: 50%; /* full window width */
+	float: left; 
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: relative;
+  bottom: 20px;
+  right: 15px;
+  left: 15px; 
+  border: 3px solid #f1f1f1;
+  background-color: white; 
+  z-index: 9;
+}
+
+#piechart{
+	width: 60%; /* full window width */
+	display: inline-block;
+	position: relative;
+}
+
+#ui{
+	width: 50%; /* full window width */
+	display: inline-block;
+	position: relative;
+}
+
+#game{ 
+	position: absolute; 
+	display: none; 
+	width: 70%; 
+}
+
+#score_bar{
+	position: relative;
+	display: block; 
+	background : url("Images/score.png");  
+	text-align: center;
+	background-size: 100% 100%;
+	background-position: center;
+	width: 70%
+}
+
+#mycanvas{
+	position:relative;
+	background : url("Images/forest.png");
+    text-align: center;
+	background-size: 100% 100%;
+	background-position: center;
+	float: left; 
+	display: block; 
+	width: 70%;
+}
+
+.container {
+  position: relative;
+  width: 25%;
+  float: left; 
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  width: 100%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .image {
+  opacity: 0.3;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #CC6633;
+  color: white;
+  font-size: 15px;
+  padding: 10px 0px;
+  font-family: "Comic Sans MS", cursive, sans-serif; 
+}
+
+.start-btn{
+    text-align: center;
+	display: inline-block;
+	margin:5px;
+    font-weight: bold;
+    padding: 10px 0 10px 10px ;
+    background-color: lightgray;
+    text-shadow: -1px -1px black, 1px 1px white;
+    color: gray;
+    -webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+    box-shadow: 0 .2em gray; 
+    cursor: pointer;
+	height: 10%;
+}
