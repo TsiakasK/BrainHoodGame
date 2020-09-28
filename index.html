@@ -101,7 +101,6 @@
 			<div id = "buttons1" style= " padding-left: 5px; padding-top: 25px">
 				<span class='start-btn' onClick="play_sel();" style= "width: 120px;"> Play!!! </span>
 				<span id= "tutBtn" class='start-btn' style= "width: 120px;"> Rules </span> 
-				<span class='start-btn' onClick="random_sel();" style= "color:  #C70039 ; width: 120px; float: left;"> Exit Game </span>
 			</div>
 			
 		</div>
@@ -122,7 +121,7 @@
 			
 			<h3> Game Progress</h3>
 			<div id = "screen_rounds">Rounds Played: 0/20</div>				
-			<div id = "screen_score">Total Game Score: 0</div>			
+			<div id = "screen_score">Total Points Earned: 0 </div>			
 		</div>		
 		
 		<!-- The Modal -->
@@ -656,6 +655,18 @@
 		chart.draw(data, options);
 		//}
     }
+	
+	
+	window.onbeforeunload = function (e) {
+		e = e || window.event;
+		// For IE and Firefox prior to version 4
+		if (e) {
+			e.returnValue = 'Sure?';
+		}
+		// For Safari
+		return 'Sure?';
+	};
+	
 	</script>
 	<div class="form-popup" id="myForm">
 	<form action="#">

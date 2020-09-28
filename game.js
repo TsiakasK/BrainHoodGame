@@ -200,7 +200,9 @@ function new_target(){
 		document.getElementById("score1b").style.left = scores[0]+ "px"; 
 		document.getElementById("score2b").style.left = scores[1]+ "px"; 
 		document.getElementById("score3b").style.left = scores[2]+ "px"; 
-		document.getElementById("score4b").style.left = scores[3]+ "px"; 
+		document.getElementById("score4b").style.left = scores[3]+ "px";
+		document.getElementById("screen_score").innerHTML = "Total Points Earner: " + scores[5];
+		document.getElementById("screen_rounds").innerHTML = "Rounds Played: " + round + "/20";
 		te = [round, sel_params[0], sel_params[1], sel_params[2], sel_params[3], sel_params[4], sel_params[5], round_scores[4], round_scores[5]]; 
 		table_entry.push(te);
 		updateTable(round, te); 
