@@ -82,10 +82,24 @@ function get_params(){
 }
 
 function play_sel(){
-	sel_params = get_params();
-	wrapper = document.getElementById('wrapper');
-	wrapper.style.display='none';
-	set_params();
+	if (check_sel()){ 
+		sel_params = get_params();
+		wrapper = document.getElementById('wrapper');
+		wrapper.style.display='none';
+		set_params();
+	}
+}
+
+function check_sel(){
+	var check_tasks = (document.getElementById('t1').alt == "unchecked") && (document.getElementById('t2').alt == "unchecked") && (document.getElementById('t3').alt == "unchecked") && (document.getElementById('t4').alt == "unchecked"); 
+	var check_speed = (document.getElementById('s1').alt == "unchecked") && (document.getElementById('s2').alt == "unchecked") && (document.getElementById('s3').alt == "unchecked"); 
+	var check_spots = (document.getElementById('d1').alt == "unchecked") && (document.getElementById('d2').alt == "unchecked") && (document.getElementById('d3').alt == "unchecked");
+	
+	if (check_tasks || check_speed || check_spots){
+		window.alert("           Please select ONE or MORE games,\r\nONE speed and ONE number of shooting bases!!!!"); 
+		return 0 ; 
+	}
+	return 1; 
 }
 
 function auto_sel(){

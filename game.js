@@ -62,7 +62,7 @@ function set_params(){
 		speed_factor = 0.8; 
 	}
 	else if (sel_params[4] == 3){
-		stimuli_speed = 200; 
+		stimuli_speed = 2500; 
 		speed_factor = 1; 
 	}
 	
