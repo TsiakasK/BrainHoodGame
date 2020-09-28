@@ -62,7 +62,7 @@ function set_params(){
 		speed_factor = 0.8; 
 	}
 	else if (sel_params[4] == 3){
-		stimuli_speed = 2500; 
+		stimuli_speed = 200; 
 		speed_factor = 1; 
 	}
 	
@@ -105,7 +105,6 @@ function generate_targets(){
         types: mydata.ttypes,
 		color: mydata.tcolors
     };
-	
 	return obj;	
 }
 
@@ -190,7 +189,7 @@ function new_target(){
 	 
 	A = setTimeout(new_target, stimuli_speed);
 	if (turn == 20){
-		//window.alert("Round Finished");
+		window.alert("Round Finished");
 		clearTimeout(A);
 		show_likert();
 		document.removeEventListener('keydown', buttonGotPressed);
@@ -201,7 +200,7 @@ function new_target(){
 		document.getElementById("score2b").style.left = scores[1]+ "px"; 
 		document.getElementById("score3b").style.left = scores[2]+ "px"; 
 		document.getElementById("score4b").style.left = scores[3]+ "px";
-		document.getElementById("screen_score").innerHTML = "Total Points Earner: " + scores[5];
+		document.getElementById("screen_score").innerHTML = "Total Points Earned: " +  Math.round(scores[5] * 10) / 10;
 		document.getElementById("screen_rounds").innerHTML = "Rounds Played: " + round + "/20";
 		te = [round, sel_params[0], sel_params[1], sel_params[2], sel_params[3], sel_params[4], sel_params[5], round_scores[4], round_scores[5]]; 
 		table_entry.push(te);
@@ -490,8 +489,6 @@ function draw_score(){
 }
 
 
-
-
 function estimate_scores(user, all_responses, movement){
 	s = [0,0,0,0,0,0] // s1, s2, s3, s4, game, points
 
@@ -531,6 +528,7 @@ function estimate_scores(user, all_responses, movement){
 	scores[3] += s[3]*speed_factor*diff_factor;
 	scores[4] += s[4];
 	cpoints = ( s[0]*speed_factor*diff_factor + s[1]*speed_factor*diff_factor + s[2]*speed_factor*diff_factor + s[3]*speed_factor*diff_factor)/4.0; 
+	cpoints = Math.round(cpoints * 10) / 10; 
 	scores[5] += cpoints;
 	
 	return [s[0]*speed_factor*diff_factor, s[1]*speed_factor*diff_factor, s[2]*speed_factor*diff_factor, s[3]*speed_factor*diff_factor, s[4], cpoints];

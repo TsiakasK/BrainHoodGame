@@ -131,7 +131,7 @@
 			<div class="modal-content">
 				<span id= "close1" class="close" style="position: relative;  ">&times;</span>
 				<div class="container2">
-					<button id= "TotalAccordion" class="accordion" style="height: 50px; width: 400px; "> 
+					<button class="accordion" style="height: 50px; width: 400px; "> 
 					<div class="containerOLM"> 
 						<img id="total" src="Images/total.png" style="height: 46px; position: relative;" >
 						<img class = "pscores" id="totalb" src="Images/ptotal.png" style="position: absolute; left: 0px; height: 47px; width: 5px; " >
@@ -139,7 +139,7 @@
 					</div>
 					</button>
 					<div class="panel" >						
-						<button id = "acc1" class="accordion" style="height: 50px; width: 400px; "> 
+						<button class="accordion" style="height: 50px; width: 400px; "> 
 						<div class="containerOLM"> 
 							<img id="score1" src="Images/score1.png" style="height: 46px; position: relative;" >
 							<img class = "pscores" id="score1b" src="Images/pscore1.png" style="position: absolute; left: 0px; height: 47px; width: 5px; " >
@@ -472,7 +472,11 @@
 	
 	<script>
 	
-	
+	//  time spent on OLM buttons [total, t, t1, t2, t3, t4]
+	olm_time = 0; 
+	//times_OLM   = [0,0,0,0,0,0]; 
+	//start_times = [0,0,0,0,0]; 
+	//end_times   = [0,0,0,0,0]; 
 	
 	// record task parameters and scores for SLR table
 	table_entry = []; // round ID, T1 ,T2, T3, T4, Speed, Difficulty, Score, Points
@@ -510,9 +514,11 @@
 			reset_table_background(); 
 			var panel = this.nextElementSibling;
 			if (panel.style.display == "block"){
+				//end_times[i] = performance.now(); 
 				panel.style.display = "none";
 			}else{
 				panel.style.display = "block";
+				//start_times[i] = performance.now(); 
 			}
 			var pans = document.getElementsByClassName("panel2");
 			for (var j = 0; j < pans.length; j++){
@@ -555,6 +561,7 @@
 
 	// When the user clicks the button, open the modal 
 	btn.onclick = function() {
+		OLM_START_TIME = performance.now();
 		var temp = Math.round(scores[5]).toString(); 
 		document.getElementById("tscore_text").innerHTML  = "My Score: " + temp; 
 		document.getElementById("total").width = scores[5];
@@ -585,6 +592,8 @@
 	// When the user clicks on <span> (x), close the modal
 	span1.onclick = function() {
 		modal.style.display = "none";
+		OLM_END_TIME = performance.now();
+		console.log(`Call to doSomething took ${(OLM_END_TIME - OLM_START_TIME)/1000} seconds.`);
 		var acc = document.getElementsByClassName("accordion");
 		reset_table_background();
 		for (var i = 0; i < acc.length; i++) 
