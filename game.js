@@ -97,8 +97,8 @@ function set_params(){
 }
 
 function generate_targets(){
-	var rnd = Math.floor(Math.random() * 20 + 1) + (sel_params[5] - 1)*20; 
-	var mydata = arrayOfTargets[39];
+	var rnd = Math.floor(Math.random() * 20) + (sel_params[5] - 1)*20; 
+	var mydata = arrayOfTargets[rnd];
 	console.log(rnd, mydata.id); 
 	var obj = {
         spots: mydata.tspots,
