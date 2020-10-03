@@ -62,7 +62,7 @@ function set_params(){
 		speed_factor = 0.8; 
 	}
 	else if (sel_params[4] == 3){
-		stimuli_speed = 100; 
+		stimuli_speed = 2500; 
 		speed_factor = 1; 
 	}
 	
@@ -112,10 +112,7 @@ function generate_response(){
 	var RES = []; var fmove = []; var tmp = []; 
 	var t = TARGETS.types; var p = TARGETS.spots; var c = TARGETS.color; 
 	
-	for(var i = 0; i < t.length; i++){
-		// MOVE AND SHOOT -- all ones		
-		// RES_1.push(1);
-		// mm = 1; 
+	for(var i = 0; i < t.length; i++){ 
 		tmp = 1; 
 		
 		// AVOID BIRDS
