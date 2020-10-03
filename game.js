@@ -62,7 +62,7 @@ function set_params(){
 		speed_factor = 0.8; 
 	}
 	else if (sel_params[4] == 3){
-		stimuli_speed = 2500; 
+		stimuli_speed = 100; 
 		speed_factor = 1; 
 	}
 	
@@ -98,8 +98,8 @@ function set_params(){
 
 function generate_targets(){
 	var rnd = Math.floor(Math.random() * 20 + 1) + (sel_params[5] - 1)*20; 
-	var mydata = arrayOfTargets[0];
-	console.log(rnd, mydata.id); 
+	var mydata = arrayOfTargets[19];
+	console.log(round, mydata.id); 
 	var obj = {
         spots: mydata.tspots,
         types: mydata.ttypes,
@@ -268,7 +268,7 @@ function carousel() {
 }
 
 function init(){
-	turn = -1; 
+	turn = -1;  
 	shoot = 0; 
 	moved = 0;
 	wait = 0; 
