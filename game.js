@@ -1,3 +1,4 @@
+// new 
 function loadImages(){
 	GplayerImage = new Image();
 	GplayerImage.src = "Images/green_player.png";
