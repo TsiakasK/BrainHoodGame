@@ -1,54 +1,45 @@
 import * as React from 'react';
-import * as Realm from 'realm-web';
+import * as RealmWeb from 'realm-web';
 
 const REALM_APP_ID = "brainhoodgame-xdgsw";
-
-const app = new Realm.App({ id: REALM_APP_ID });
+const app = new RealmWeb.App({ id: REALM_APP_ID });
 
 const RealmAppContext = React.createContext<IRealmApp | void>(undefined);
 
-interface IRealmApp {
+export interface IRealmApp {
   id: string;
-  user: Realm.User | null;
-  logIn: (email: string, password: string) => Promise<void>;
-  logOut: () => Promise<void>;
-  registerUser(email: string, password: string): Promise<void>;
+  user: Realm.User;
+  logIn(): any;
 }
 
 const RealmApp: React.FC = ({ children }) => {
-  // Keep track of the current user in local state
-  const appRef = React.useRef(app);
-  const [user, setUser] = React.useState(app.currentUser);
-  React.useEffect(() => {
-    setUser(app.currentUser);
-  }, [appRef.current.currentUser]);
+  const initUser = { id: '', state: RealmWeb.UserState.LoggedOut, name: 'tsiko', accessToken: null, refreshToken: null, profile: {} as any };
+  const [user, setUser] = React.useState<Realm.User>(initUser);
 
-  // Let new users register an account
-  const registerUser = async (email: string, password: string) => {
-    // return await app.emailPasswordAuth.registerUser(email, password); <----------------------------------------------- // TODO RE-ENABLE
+
+  const logIn = async () => {
+    // Create an anonymous credential
+    const credentials = RealmWeb.Credentials.anonymous();
+    try {
+      // Authenticate the user
+      const user = await app.logIn(credentials);
+      // `App.currentUser` updates to match the logged in user
+      // assert(user.id === app.currentUser.id)
+      setUser(user);
+      // return user
+    } catch (err) {
+      console.error("Failed to log in", err);
+    }
   }
 
-  // Let registered users log in
-  const logIn = async (email: string, password: string) => {
-    const credentials = Realm.Credentials.emailPassword(email, password);
-    await app.logIn(credentials);
-    setUser(app.currentUser);
-  }
-
-  // Let logged in users log out
-  const logOut = async () => {
-    // await app.currentUser?.logOut(); <----------------------------------------------- // TODO RE-ENABLE
-    setUser(app.currentUser);
-  }
-
-  // Provide the current user and authentication methods to the wrapped tree
+  // // Provide the current user and authentication methods to the wrapped tree
   const context: IRealmApp = {
     id: REALM_APP_ID,
     user,
-    logIn,
-    logOut,
-    registerUser,
+    logIn
   };
+
+
   return (
     <RealmAppContext.Provider value={context}>
       {children}

@@ -1,19 +1,21 @@
-import * as React from 'react';
-import * as Realm from 'realm-web';
-
 // Apollo
-import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client';
-import { NormalizedCacheObject } from '@apollo/client/cache';
+import { ApolloClient, DefaultOptions, HttpLink, InMemoryCache } from 'apollo-boost';
+import { setContext } from 'apollo-link-context';
+import * as React from 'react';
+import * as RealmWeb from 'realm-web';
+
+import { ApolloProvider } from '@apollo/react-hooks';
 
 import { useRealmApp } from './realm-app';
 
 const RealmApolloProvider: React.FC = ({ children }) => {
+  // const { id, user } = useRealmApp();
   const { id, user } = useRealmApp();
   const [client, setClient] = React.useState(
-    createApolloClient(id, user as Realm.User)
+    createApolloClient(id, user as RealmWeb.User)
   );
   React.useEffect(() => {
-    setClient(createApolloClient(id, user as Realm.User));
+    setClient(createApolloClient(id, user as RealmWeb.User));
   }, [id, user]);
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
@@ -21,33 +23,30 @@ const RealmApolloProvider: React.FC = ({ children }) => {
 export default RealmApolloProvider;
 
 // TODO: Implement createApolloClient()
-function createApolloClient(
-  realmAppId: string,
-  user: Realm.User
-): ApolloClient<NormalizedCacheObject> {
+function createApolloClient(realmAppId: string, user: RealmWeb.User) {
   const graphql_url = `https://realm.mongodb.com/api/client/v2.0/app/${realmAppId}/graphql`;
+  const httpLink = new HttpLink({ uri: graphql_url });
+  const authorizationHeaderLink = setContext(async (_, { headers }) => ({
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${user.accessToken}`
+    },
+  }));
 
-  const client = new ApolloClient({
-    link: new HttpLink({
-      uri: graphql_url,
-      fetch: async (uri: RequestInfo, options: RequestInit) => {
-        if (!options.headers) {
-          options.headers = {} as Record<string, string>;
-        }
-        // Refreshing custom data also ensures a valid access token
-        // await user.refreshCustomData(); <----------------------------------------------- // TODO RE-ENABLE
-        const authenticatedOptions: RequestInit = {
-          ...options,
-          headers: {
-            ...options.headers,
-            Authorization: `Bearer ${user.accessToken}`
-          }
-        }
-        return fetch(uri, authenticatedOptions);
-      },
-    }),
+  const defaultOptions: DefaultOptions = {
+    watchQuery: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'ignore'
+    },
+    query: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all',
+    },
+  }
+
+  return new ApolloClient({
+    link: authorizationHeaderLink.concat(httpLink),
     cache: new InMemoryCache(),
+    defaultOptions
   });
-
-  return client
 }

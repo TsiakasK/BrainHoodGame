@@ -1,8 +1,9 @@
-import * as Types from './types';
-
 import gql from 'graphql-tag';
-import * as ApolloReactCommon from '@apollo/client';
-import * as ApolloReactHooks from '@apollo/client';
+
+import * as ApolloReactCommon from '@apollo/react-common';
+import * as ApolloReactHooks from '@apollo/react-hooks';
+
+import * as Types from './types';
 
 export const InsertManySessionsDocument = gql`
     mutation insertManySessions($data: [Game_sessionInsertInput!]!) {
@@ -31,8 +32,8 @@ export type InsertManySessionsMutationFn = ApolloReactCommon.MutationFunction<Ty
  * });
  */
 export function useInsertManySessionsMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<Types.InsertManySessionsMutation, Types.InsertManySessionsMutationVariables>) {
-        return ApolloReactHooks.useMutation<Types.InsertManySessionsMutation, Types.InsertManySessionsMutationVariables>(InsertManySessionsDocument, baseOptions);
-      }
+  return ApolloReactHooks.useMutation<Types.InsertManySessionsMutation, Types.InsertManySessionsMutationVariables>(InsertManySessionsDocument, baseOptions);
+}
 export type InsertManySessionsMutationHookResult = ReturnType<typeof useInsertManySessionsMutation>;
 export type InsertManySessionsMutationResult = ApolloReactCommon.MutationResult<Types.InsertManySessionsMutation>;
 export type InsertManySessionsMutationOptions = ApolloReactCommon.BaseMutationOptions<Types.InsertManySessionsMutation, Types.InsertManySessionsMutationVariables>;
