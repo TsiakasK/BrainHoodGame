@@ -63,7 +63,7 @@ function set_params(){
 		speed_factor = 0.8; 
 	}
 	else if (sel_params[4] == 3){
-		stimuli_speed = 2500; 
+		stimuli_speed = 200; 
 		speed_factor = 1; 
 	}
 	
@@ -176,6 +176,7 @@ function new_target(){
 	wait = 0; 
 	moved = 0; 
 	InvalidMove = 0; 
+	shot = 0;
 	
 	turn ++; 
 	targets = []; 
@@ -222,10 +223,10 @@ function updateTable(r, data){
 	if (data[4] == 1) tmp = 'X'; else tmp = '-';
 	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(4,10)].innerHTML=tmp;
 	
-	if (data[5] == 1) tmp = 'slow'; else if (data[5] == 2) tmp = "medium";  else tmp = 'fast';
+	if (data[5] == 1) tmp = 'slow (1/3)'; else if (data[5] == 2) tmp = "medium (2/3)";  else tmp = 'fast (3/3)';
 	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(5,10)].innerHTML=tmp;
 	
-	if (data[6] == 1) tmp = 'three'; else if (data[6] == 2) tmp = "five";  else tmp = 'seven';
+	if (data[6] == 1) tmp = 'three (3)'; else if (data[6] == 2) tmp = "five (5)";  else tmp = 'seven (7)';
 	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(6,10)].innerHTML=tmp;
 	
 	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(7,10)].innerHTML=data[7] + "/20";
@@ -275,6 +276,7 @@ function init(){
 	//response = []; 
 	user_response = []; ///////////
 	user_movement = []; 
+	user_score = []; 
 	gameover = false; 
 	
 	mygame.style.display = "block"; 
@@ -289,6 +291,8 @@ function init(){
 	prev_counter = 0;
 	counter = 0;
 	current = 0; 
+	
+	 
 
 	loadImages();
 	document.addEventListener('keydown', buttonGotPressed, true);
@@ -321,7 +325,7 @@ function init(){
 				
 				this.arrows.push(b);
 				prev_counter = counter;
-				
+				shot = 1; 
 				targets.forEach(function(target){
 					if(isCollidingWithBullet(b,target) || rules[0] == 0){
 						shoot = 1; 
@@ -476,13 +480,19 @@ function target(x,type){
 }
 
 function draw_score(){
-	user_response.push(shoot);
-	user_movement.push(moved); 
 	if (wait == 0){
-		if (EXPECTED.shouldShoot[turn] == shoot && InvalidMove == 0)
+		user_response.push(shoot);
+		user_movement.push(moved); 
+		if (EXPECTED.shouldShoot[turn] == shoot && InvalidMove == 0 && EXPECTED.shouldShoot[turn] == shot){
+			wait = 1;
+			user_score.push(1); 
 			sc.drawImage(correctImage, (turn)*15, 5, 15, 20);
-		else
+		}
+		else{
+			wait = 1; 
+			user_score.push(0); 
 			sc.drawImage(wrongImage, (turn)*15, 5, 15, 20);
+		}
 	} 
 }
 
@@ -490,35 +500,27 @@ function draw_score(){
 function estimate_scores(user, all_responses, movement){
 	s = [0,0,0,0,0,0] // s1, s2, s3, s4, game, points
 
-	// game
-	tmp = 0; 
-	for (var i = 0; i < user.length; i++)
-		if (user[i] == all_responses.shouldShoot[i])
-			tmp++;
-	s[4] = tmp;   // 0 - 20
+	s[4] = user_score.reduce((a, b) => a + b, 0);
 	
 	// move and shoot
 	if (rules[0] == 1){
-		s[0] = tmp; // 0 - 20
+		s[0] = s[4]; // 0 - 20
 	}
 	
 	// avoid birds
 	if (rules[1] == 1){
-		s[1] = tmp; // 0 - 20
+		s[1] = s[4]; // 0 - 20
 	}
 
 	// remember targets
 	if (rules[2] == 1){
-		s[2] = tmp; // 0 - 20
+		s[2] = s[4]; // 0 - 20
 	}
 
 	// switch targets
 	if (rules[3] == 1){
-		s[3] = tmp; // 0 - 20
+		s[3] = s[4]; // 0 - 20
 	}	
-	
-	//s[5] = speed_factor*diff_factor * s[4];
-	//avg_score = (s[0]*speed_factor*diff_factor + s[1]*speed_factor*diff_factor + s[2]*speed_factor*diff_factor + s[3]*speed_factor*diff_factor + s[5])/5.0; 
 	
 	scores[0] += s[0]*speed_factor*diff_factor;
 	scores[1] += s[1]*speed_factor*diff_factor;

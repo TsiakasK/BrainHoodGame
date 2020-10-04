@@ -562,19 +562,19 @@
 	// When the user clicks the button, open the modal 
 	btn.onclick = function() {
 		OLM_START_TIME = performance.now();
-		var temp = Math.round(scores[5]).toString(); 
+		var temp = (Math.round(scores[5] * 10)/10).toString(); 
 		document.getElementById("tscore_text").innerHTML  = "My Score: " + temp; 
 		document.getElementById("total").width = scores[5];
-		var temp = Math.round(scores[0]).toString(); 
+		var temp = (Math.round(scores[0] * 10)/10).toString(); 
 		document.getElementById("s1_text").innerHTML  = "Move and Shoot: " + temp;
 		document.getElementById("score1").width = scores[0];
-		var temp = Math.round(scores[1]).toString(); 
+		var temp = (Math.round(scores[1] * 10)/10).toString(); 
 		document.getElementById("s2_text").innerHTML  = "Avoid Birds: " + temp;
 		document.getElementById("score2").width = scores[1];
-		var temp = Math.round(scores[2]).toString(); 
+		var temp = (Math.round(scores[2] * 10)/10).toString(); 
 		document.getElementById("s3_text").innerHTML  = "Remember Targets: " + temp;
 		document.getElementById("score3").width = scores[2];
-		var temp = Math.round(scores[3]).toString(); 
+		var temp = (Math.round(scores[3] * 10)/10).toString(); 
 		document.getElementById("s4_text").innerHTML  = "Switch Targets: " + temp;
 		document.getElementById("score4").width = scores[3];
 		
