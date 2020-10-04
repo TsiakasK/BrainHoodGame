@@ -63,7 +63,7 @@ function set_params(){
 		speed_factor = 0.8; 
 	}
 	else if (sel_params[4] == 3){
-		stimuli_speed = 200; 
+		stimuli_speed = 2500; 
 		speed_factor = 1; 
 	}
 	
@@ -487,12 +487,17 @@ function draw_score(){
 			wait = 1;
 			user_score.push(1); 
 			sc.drawImage(correctImage, (turn)*15, 5, 15, 20);
+			var audio = new Audio('Sounds/arrow.mp3');
+			audio.play();
 		}
 		else{
 			wait = 1; 
 			user_score.push(0); 
 			sc.drawImage(wrongImage, (turn)*15, 5, 15, 20);
+			var audio = new Audio('Sounds/oops.mp3');
+			audio.play();
 		}
+		
 	} 
 }
 
