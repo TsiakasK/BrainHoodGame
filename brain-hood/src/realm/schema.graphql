@@ -1,0 +1,143 @@
+type DeleteManyPayload {
+  deletedCount: Int!
+}
+
+type Game_session {
+  OLM: [String]
+  id: Int!
+  move: [Int]
+  round: Int!
+  scores: [String]
+  shoot: [Int]
+  tcolors: [Int]
+  tselection: [Int]
+  tspots: [Int]
+  ttypes: [Int]
+}
+
+input Game_sessionInsertInput {
+  OLM: [String]
+  ttypes: [Int]
+  shoot: [Int]
+  scores: [String]
+  tselection: [Int]
+  id: Int!
+  tcolors: [Int]
+  move: [Int]
+  round: Int!
+  tspots: [Int]
+}
+
+input Game_sessionQueryInput {
+  tselection: [Int]
+  ttypes: [Int]
+  id_exists: Boolean
+  round_in: [Int]
+  AND: [Game_sessionQueryInput!]
+  id_gte: Int
+  tcolors_exists: Boolean
+  scores_exists: Boolean
+  shoot_in: [Int]
+  shoot_exists: Boolean
+  tspots_exists: Boolean
+  round_gte: Int
+  scores: [String]
+  ttypes_in: [Int]
+  id_lte: Int
+  round_gt: Int
+  tspots_in: [Int]
+  tselection_exists: Boolean
+  round_lt: Int
+  tspots: [Int]
+  move_nin: [Int]
+  round: Int
+  id_in: [Int]
+  OLM_in: [String]
+  tselection_in: [Int]
+  move_exists: Boolean
+  id: Int
+  id_nin: [Int]
+  round_ne: Int
+  tspots_nin: [Int]
+  tcolors_nin: [Int]
+  id_ne: Int
+  OLM_exists: Boolean
+  OR: [Game_sessionQueryInput!]
+  shoot_nin: [Int]
+  move: [Int]
+  OLM_nin: [String]
+  scores_nin: [String]
+  round_exists: Boolean
+  round_lte: Int
+  scores_in: [String]
+  round_nin: [Int]
+  id_gt: Int
+  OLM: [String]
+  tcolors_in: [Int]
+  id_lt: Int
+  ttypes_exists: Boolean
+  shoot: [Int]
+  move_in: [Int]
+  ttypes_nin: [Int]
+  tcolors: [Int]
+  tselection_nin: [Int]
+}
+
+enum Game_sessionSortByInput {
+  ID_DESC
+  ROUND_ASC
+  ROUND_DESC
+  ID_ASC
+}
+
+input Game_sessionUpdateInput {
+  id_inc: Int
+  tselection: [Int]
+  tselection_unset: Boolean
+  move: [Int]
+  move_unset: Boolean
+  id_unset: Boolean
+  shoot_unset: Boolean
+  tcolors_unset: Boolean
+  tcolors: [Int]
+  tspots: [Int]
+  ttypes_unset: Boolean
+  OLM: [String]
+  tspots_unset: Boolean
+  round_inc: Int
+  OLM_unset: Boolean
+  scores_unset: Boolean
+  shoot: [Int]
+  round_unset: Boolean
+  id: Int
+  scores: [String]
+  round: Int
+  ttypes: [Int]
+}
+
+type InsertManyPayload {
+  insertedIds: [ObjectId]!
+}
+
+type Mutation {
+  deleteManyGame_sessions(query: Game_sessionQueryInput): DeleteManyPayload
+  deleteOneGame_session(query: Game_sessionQueryInput!): Game_session
+  insertManyGame_sessions(data: [Game_sessionInsertInput!]!): InsertManyPayload
+  insertOneGame_session(data: Game_sessionInsertInput!): Game_session
+  replaceOneGame_session(query: Game_sessionQueryInput, data: Game_sessionInsertInput!): Game_session
+  updateManyGame_sessions(query: Game_sessionQueryInput, set: Game_sessionUpdateInput!): UpdateManyPayload
+  updateOneGame_session(set: Game_sessionUpdateInput!, query: Game_sessionQueryInput): Game_session
+  upsertOneGame_session(query: Game_sessionQueryInput, data: Game_sessionInsertInput!): Game_session
+}
+
+scalar ObjectId
+
+type Query {
+  game_session(query: Game_sessionQueryInput): Game_session
+  game_sessions(query: Game_sessionQueryInput, limit: Int = 100, sortBy: Game_sessionSortByInput): [Game_session]!
+}
+
+type UpdateManyPayload {
+  matchedCount: Int!
+  modifiedCount: Int!
+}

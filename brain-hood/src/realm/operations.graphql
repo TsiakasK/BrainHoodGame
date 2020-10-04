@@ -1,0 +1,5 @@
+mutation insertManySessions($data: [Game_sessionInsertInput!]!) {
+  insertManyGame_sessions(data: $data) {
+    insertedIds
+  }
+}
