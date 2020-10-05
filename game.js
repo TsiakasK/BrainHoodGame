@@ -212,6 +212,15 @@ function new_target(){
 			session_scores.push(round_scores); 
 			USER_shoot.push(user_response); 
 			USER_move.push(user_movement);
+			
+			var session_data = {
+				targetsIDs: targetIDs,
+				shoot: USER_shoot, 
+				move: USER_move, 
+				tselection: sel_params,
+				scores: session_scores
+			};	
+			
 		}
 		else{
 			mygame.style.display = "none"; 
