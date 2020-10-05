@@ -139,7 +139,7 @@
 						<div id= "tscore_text" class="centered" style="font-size:16px"> My Score </div>
 					</div>
 					</button>
-					<div class="panel" >						
+					<div class="panel" id="OLM">						
 						<button class="accordion" style="height: 50px; width: 400px; "> 
 						<div class="containerOLM"> 
 							<img id="score1" src="Images/score1.png" style="height: 46px; position: relative;" >
@@ -147,7 +147,7 @@
 							<div id= "s1_text" class="centered"  > Move and Shoot </div> 
 						</div>
 						</button>
-						<div class="panel2" style="width: 300px;">
+						<div class="panel2" style="width: 300px;" id="OLM1">
 							<div class = "graph" id="olm_chart" style="width: 350px;"></div>
 						</div>
 
@@ -158,7 +158,7 @@
 							<div id= "s2_text" class="centered" > Avoid Birds </div> 
 						</div>
 						</button>
-						<div class="panel2" style="width: 300px;">
+						<div class="panel2" style="width: 300px;" id="OLM2">
 							<div class = "graph" id="olm_chart" style="width: 350px;"></div>
 						</div>
 
@@ -169,7 +169,7 @@
 							<div id= "s3_text" class="centered"  > Remember Targets </div>
 						</div>
 						</button>
-						<div class="panel2" style="width: 300px;">
+						<div class="panel2" style="width: 300px;" id="OLM3">
 							<div class = "graph" id="olm_chart" style="width: 350px;"></div>
 						</div>
 
@@ -180,7 +180,7 @@
 							<div id= "s4_text" class="centered">Switch Targets</div>
 						</div>
 						</button>
-						<div class="panel2" style="width: 300px;">
+						<div class="panel2" style="width: 300px;" id="OLM4">
 							<div class = "graph" id="olm_chart" style="width: 350px;"></div>
 						</div>
 					</div>
@@ -473,6 +473,9 @@
 	<script type= "text/javascript" src= "https://www.gstatic.com/charts/loader.js"> </script>
 	
 	<script>
+	// ACTIVITY LOG 
+	ACTIVITY_LOG = [["NEW", "0", performance.now()]]; 
+	
 	
 	//  time spent on OLM buttons [total, t, t1, t2, t3, t4]
 	olm_time = 0; 
@@ -480,7 +483,7 @@
 	//start_times = [0,0,0,0,0]; 
 	//end_times   = [0,0,0,0,0]; 
 	
-	// record task parameters and scores for SLR table
+	// record task parameters and scores for SRL table
 	table_entry = []; // round ID, T1 ,T2, T3, T4, Speed, Difficulty, Score, Points
 	
 	// SIDE NAVIGATION
@@ -516,10 +519,11 @@
 			reset_table_background(); 
 			var panel = this.nextElementSibling;
 			if (panel.style.display == "block"){
-				//end_times[i] = performance.now(); 
+				ACTIVITY_LOG.push([panel.id, "1", performance.now()]) 
 				panel.style.display = "none";
 			}else{
 				panel.style.display = "block";
+				ACTIVITY_LOG.push([panel.id, "0", performance.now()])
 				//start_times[i] = performance.now(); 
 			}
 			var pans = document.getElementsByClassName("panel2");
@@ -530,7 +534,8 @@
 				}
 				else
 					pans[j].style.display = "none"; 
-			}			
+			}
+			console.log(ACTIVITY_LOG); 
 	  });
 	}
 	
@@ -581,6 +586,7 @@
 		document.getElementById("score4").width = scores[3];
 		
 		modal.style.display = "block";
+		ACTIVITY_LOG.push(["VIEW_SCORES", "0", performance.now()]); 
 	}
 	
 	// When the user clicks the button, open the modal 
@@ -589,12 +595,14 @@
 	  var tID = pp.slice(0,4).join(""); 
 	  tut_pic.style.backgroundImage = "url(Images/tutorial_" + tID + ".png)";
 	  tut_modal.style.display = "block";
+	  ACTIVITY_LOG.push(["RULES", "0", performance.now()]); 
 	}
 
 	// When the user clicks on <span> (x), close the modal
 	span1.onclick = function() {
 		modal.style.display = "none";
 		OLM_END_TIME = performance.now();
+		ACTIVITY_LOG.push(["VIEW_SCORES", "1", performance.now()]);
 		console.log(`Call to doSomething took ${(OLM_END_TIME - OLM_START_TIME)/1000} seconds.`);
 		var acc = document.getElementsByClassName("accordion");
 		reset_table_background();
@@ -605,6 +613,7 @@
 	// When the user clicks on <span> (x), close the modal
 	span2.onclick = function() {
 	  tut_modal.style.display = "none";
+	  ACTIVITY_LOG.push(["RULES", "1", performance.now()]); 
 	}
 
 	// When the user clicks anywhere outside of the modal, close it

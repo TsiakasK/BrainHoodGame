@@ -41,8 +41,8 @@ var session  =
 var activity_log = 
 	[
 		{
-			"activity" : {"NEW", "VIEW_SCORE", "R1", "R2", ...., "PLAY"}, 
-			"status" : {0: "was_open", 1: "was_closed"}, 
+			"activity" : {"NEW ROUND", "VIEW_SCORE", "PRACTICE", "RULES", "R1", "R2", ...., "PLAY"}, 
+			"status" : {0: "was_closed", 1: "was_open"}, 
 			"timestamp" : time
 		}
 	]; 

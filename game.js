@@ -217,26 +217,15 @@ function new_target(){
 }
 
 function updateTable(r, data){
-	if (data[1] == 1) tmp = 'X'; else tmp = '-';
-	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(1,10)].innerHTML=tmp;
-	
-	if (data[2] == 1) tmp = 'X'; else tmp = '-';
-	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(2,10)].innerHTML=tmp;
-	
-	if (data[3] == 1) tmp = 'X'; else tmp = '-';
-	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(3,10)].innerHTML=tmp;
-	
-	if (data[4] == 1) tmp = 'X'; else tmp = '-';
-	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(4,10)].innerHTML=tmp;
-	
+	if (data[1] == 1) tmp = 'X'; else tmp = '-'; var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(1,10)].innerHTML=tmp;
+	if (data[2] == 1) tmp = 'X'; else tmp = '-'; var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(2,10)].innerHTML=tmp;
+	if (data[3] == 1) tmp = 'X'; else tmp = '-'; var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(3,10)].innerHTML=tmp;	
+	if (data[4] == 1) tmp = 'X'; else tmp = '-'; var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(4,10)].innerHTML=tmp;
 	if (data[5] == 1) tmp = 'slow (1/3)'; else if (data[5] == 2) tmp = "medium (2/3)";  else tmp = 'fast (3/3)';
 	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(5,10)].innerHTML=tmp;
-	
 	if (data[6] == 1) tmp = 'three (3)'; else if (data[6] == 2) tmp = "five (5)";  else tmp = 'seven (7)';
 	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(6,10)].innerHTML=tmp;
-	
 	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(7,10)].innerHTML=data[7] + "/20";
-	
 	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(8,10)].innerHTML=data[8];
 }
 
@@ -248,7 +237,8 @@ function show_likert() {
 function BackToGame(){
 	document.getElementById("myForm").style.display = "none";
 	wrapper.style.display= "block";
-	clear_sel(); 
+	clear_sel();
+	ACTIVITY_LOG.push(["NEW", "0", performance.now()]); 
 }
 
 function init(){

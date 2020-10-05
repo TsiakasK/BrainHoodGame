@@ -43,12 +43,15 @@ function image_check(img){
 		}
 		img.src = "Images/" + img.id + "_checked.png"; 
 		img.alt = "checked"
+		ACTIVITY_LOG.push([img.id, "0", performance.now()]); 
 	}
 	else{
 		name = "Images/" + img.id + ".png";
 		img.src = "Images/" + img.id + ".png";
-		img.alt = "unchecked"		
+		img.alt = "unchecked"
+		ACTIVITY_LOG.push([img.id, "1", performance.now()]);	
 	}
+	console.log(ACTIVITY_LOG); 
 }
 
 function get_params(){
@@ -82,6 +85,7 @@ function get_params(){
 }
 
 function practice_round(){
+	ACTIVITY_LOG.push(["PRACTICE", "0", performance.now()]); 
 	practice = 1; 
 	play_sel(); 
 }
@@ -92,6 +96,8 @@ function play_sel(){
 		wrapper = document.getElementById('wrapper');
 		wrapper.style.display='none';
 		set_params();
+		if (practice == 0)
+			ACTIVITY_LOG.push(["PLAY", "0", performance.now()]); 
 	}
 }
 
