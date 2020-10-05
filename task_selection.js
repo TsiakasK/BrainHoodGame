@@ -81,6 +81,11 @@ function get_params(){
 	return sel_params; 
 }
 
+function practice_round(){
+	practice = 1; 
+	play_sel(); 
+}
+
 function play_sel(){
 	if (check_sel()){ 
 		sel_params = get_params();
@@ -129,6 +134,7 @@ function eval_sel(){
 	
 }
 
+practice = 0; 
 mycanvas = document.getElementById('mycanvas'); 
 mygame = document.getElementById('game'); 
 var session_scores = [[0,0,0,0,0,0]];  // s1, s3, s3, s4, game, points

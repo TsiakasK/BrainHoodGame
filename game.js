@@ -63,7 +63,7 @@ function set_params(){
 		speed_factor = 0.8; 
 	}
 	else if (sel_params[4] == 3){
-		stimuli_speed = 2500; 
+		stimuli_speed = 200; 
 		speed_factor = 1; 
 	}
 	
@@ -192,23 +192,27 @@ function new_target(){
 		audio.play();
 		window.alert("Round Finished");
 		clearTimeout(A);
-		show_likert();
 		document.removeEventListener('keydown', buttonGotPressed);
 		gameover = true;
-		round_scores = estimate_scores(user_response, EXPECTED, user_movement);
-		document.getElementById("totalb").style.left = scores[5] + "px"; 
-		document.getElementById("score1b").style.left = scores[0]+ "px"; 
-		document.getElementById("score2b").style.left = scores[1]+ "px"; 
-		document.getElementById("score3b").style.left = scores[2]+ "px"; 
-		document.getElementById("score4b").style.left = scores[3]+ "px";
-		document.getElementById("screen_score").innerHTML = "Total Points Earned: " +  Math.round(scores[5] * 10) / 10;
-		document.getElementById("screen_rounds").innerHTML = "Rounds Played: " + round + "/20";
-		te = [round, sel_params[0], sel_params[1], sel_params[2], sel_params[3], sel_params[4], sel_params[5], round_scores[4], round_scores[5]]; 
-		table_entry.push(te);
-		updateTable(round, te); 
-		session_scores.push(round_scores); 
-		//console.log(session_scores);
-	
+		if (practice == 0){
+			show_likert();
+			round_scores = estimate_scores(user_response, EXPECTED, user_movement);
+			document.getElementById("totalb").style.left = scores[5] + "px"; 
+			document.getElementById("score1b").style.left = scores[0]+ "px"; 
+			document.getElementById("score2b").style.left = scores[1]+ "px"; 
+			document.getElementById("score3b").style.left = scores[2]+ "px"; 
+			document.getElementById("score4b").style.left = scores[3]+ "px";
+			document.getElementById("screen_score").innerHTML = "Total Points Earned: " +  Math.round(scores[5] * 10) / 10;
+			document.getElementById("screen_rounds").innerHTML = "Rounds Played: " + round + "/20";
+			te = [round, sel_params[0], sel_params[1], sel_params[2], sel_params[3], sel_params[4], sel_params[5], round_scores[4], round_scores[5]]; 
+			table_entry.push(te);
+			updateTable(round, te); 
+			session_scores.push(round_scores); 
+		}
+		else{
+			mygame.style.display = "none"; 
+			BackToGame();
+		}
 	}	
 }
 
@@ -557,7 +561,10 @@ function render(){
 	draw();
 	update();
 	if (gameover == true){
-		round ++; 
+		if (practice == 0)
+			round ++; 
+		else 
+			practice = 0; 
 		player = {}; 
 		gameover = false;
 	}
@@ -580,6 +587,7 @@ function carousel() {
 	myIndex++;
 	if (myIndex > x.length) {
 		clearTimeout(C); 
+		myIndex = 0; 
 		init(); 
 		render();
 	}    
