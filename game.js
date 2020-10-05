@@ -584,7 +584,20 @@ function carousel() {
 		render();
 	}    
 	else{
-		x[myIndex-1].style.display = "block";
-		C = setTimeout(carousel, 1000); // Change image every 1 second
+		if (myIndex > 1){
+			x[myIndex-1].style.display = "block";
+			C = setTimeout(carousel, 1500); // Change image every 1 second
+		}
+		else {
+			if (rules[0] == 0){
+				x[myIndex-1].style.display = "block";
+				myIndex++;
+			}
+			else{
+				x[myIndex].style.display = "block";
+				myIndex++; 
+			}
+			C = setTimeout(carousel, 2500); // Change image every 1 second
+		}
 	}
 }
