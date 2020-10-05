@@ -35,6 +35,15 @@ var session  =
 			"OLM": [[total, t, t1, t2, t3, t4]	, [total, t, t1, t2, t3, t4], ..., [total, t, t1, t2, t3, t4]], 
 			"scores" : [[s1, s2, s3,s4, game, points], [s1, s2, s3,s4, game, points], ..., [s1, s2, s3,s4, game, points]]
 		}, 
+		{ 
+			"id" : 1, 
+			"targetsIDs" : [43, 23, 12, 5, 12, 23, 34, 12, ...., 12],
+			"shoot" : [[0,1,1,..., ,0,1],[0,1,1,..., ,0,1], ..., [0,1,1,..., ,0,1]],
+			"move" : [[0,1,1,..., ,0,1],[0,1,1,..., ,0,1], ..., [0,1,1,..., ,0,1]],
+			"tselection" : [[1,0,0,0,1,3], [1,0,1,0,2,3], ..., [1,1,0,1,1,2]],  
+			"OLM": [[total, t, t1, t2, t3, t4]	, [total, t, t1, t2, t3, t4], ..., [total, t, t1, t2, t3, t4]], 
+			"scores" : [[s1, s2, s3,s4, game, points], [s1, s2, s3,s4, game, points], ..., [s1, s2, s3,s4, game, points]]
+		}
 	];
 
 // one activity log for the entire session, number of entries (activities) not fixed, depends on user activity

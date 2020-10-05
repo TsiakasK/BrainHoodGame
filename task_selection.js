@@ -143,13 +143,16 @@ function eval_sel(){
 practice = 0; 
 mycanvas = document.getElementById('mycanvas'); 
 mygame = document.getElementById('game'); 
-var session_scores = [[0,0,0,0,0,0]];  // s1, s3, s3, s4, game, points
+var session_scores = [];  // s1, s3, s3, s4, game, points
 scorec = document.getElementById('score_bar'); 
 scorec.width = mycanvas.width;
 scorec.height = 0.2*mycanvas.height;
 var params = [];
 scores = [0,0,0,0,0,0]; 
-round = 1; 
+round = 1;
+targetIDs = [];
+USER_shoot = []; 
+USER_move = [];  
 
 
 

@@ -94,6 +94,7 @@ function set_params(){
 	// generate targets and expected responses
 	TARGETS = generate_targets(); 
 	EXPECTED = generate_response(); 
+	targetIDs.push(TARGETS.id); 
 	start_game(); 
 }
 
@@ -104,7 +105,8 @@ function generate_targets(){
 	var obj = {
         spots: mydata.tspots,
         types: mydata.ttypes,
-		color: mydata.tcolors
+		color: mydata.tcolors, 
+		id: mydata.id
     };
 	return obj;	
 }
@@ -208,6 +210,8 @@ function new_target(){
 			table_entry.push(te);
 			updateTable(round, te); 
 			session_scores.push(round_scores); 
+			USER_shoot.push(user_response); 
+			USER_move.push(user_movement);
 		}
 		else{
 			mygame.style.display = "none"; 
@@ -240,7 +244,8 @@ function BackToGame(){
 	clear_sel();
 	ACTIVITY_LOG.push(["NEW", "0", performance.now()]); 
 	if (round == 21){ // 20 rounds total
-		window.alert("DONE");
+		window.alert("SESSION DONE");	
+		// targetIDs
 	}
 }
 
@@ -252,7 +257,7 @@ function init(){
 	InvalidMove = 0;  
 	
 	//response = []; 
-	user_response = []; ///////////
+	user_response = []; 
 	user_movement = []; 
 	user_score = []; 
 	gameover = false; 
@@ -270,8 +275,6 @@ function init(){
 	counter = 0;
 	current = 0; 
 	
-	 
-
 	loadImages();
 	document.addEventListener('keydown', buttonGotPressed, true);
 
