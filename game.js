@@ -571,19 +571,6 @@ function start_game(){
 
 // Carousel -- 3 2 1 GO!!
 var myIndex = 0;
-function caroxusel() {
-	var ctxc = mycanvas.getContext("2d");
-	var img = new Image();
-	img.onload = function(){
-		  ctxc.drawImage(img,0,0);
-	};
-	img.src="Images/c" + myIndex + ".PNG"; 
-	var C = setTimeout(carousel, 1000); 
-	if (myIndex == 6){
-		clearTimeout(C); 
-	}
-}
-
 function carousel() {
 	var i;
 	var x = document.getElementsByClassName("mySlides");
