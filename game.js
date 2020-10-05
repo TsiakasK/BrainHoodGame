@@ -188,6 +188,8 @@ function new_target(){
 	 
 	A = setTimeout(new_target, stimuli_speed);
 	if (turn == 20){
+		var audio = new Audio('Sounds/finish.mp3');
+		audio.play();
 		window.alert("Round Finished");
 		clearTimeout(A);
 		show_likert();
@@ -243,27 +245,6 @@ function BackToGame(){
 	document.getElementById("myForm").style.display = "none";
 	wrapper.style.display= "block";
 	clear_sel(); 
-}
-
-// 3 2 1 GO!!
-var myIndex = 0;
-
-function carousel() {
-	var i;
-	var x = document.getElementsByClassName("mySlides");
-	for (i = 0; i < x.length; i++) {
-		x[i].style.display = "none";  
-	}
-	myIndex++;
-	if (myIndex > x.length) {myIndex = 1}    
-	x[myIndex-1].style.display = "block"; 
-	if (myIndex < 5)
-		setTimeout(carousel, 1000); // Change image every 1 second
-	else{
-		x[myIndex-1].style.display = "none";
-		init();
-		render();
-	}		
 }
 
 function init(){
@@ -326,6 +307,8 @@ function init(){
 				this.arrows.push(b);
 				prev_counter = counter;
 				shot = 1; 
+				var audio = new Audio('Sounds/arrow.mp3');
+				audio.play();
 				targets.forEach(function(target){
 					if(isCollidingWithBullet(b,target) || rules[0] == 0){
 						shoot = 1; 
@@ -487,15 +470,11 @@ function draw_score(){
 			wait = 1;
 			user_score.push(1); 
 			sc.drawImage(correctImage, (turn)*15, 5, 15, 20);
-			var audio = new Audio('Sounds/arrow.mp3');
-			audio.play();
 		}
 		else{
 			wait = 1; 
 			user_score.push(0); 
 			sc.drawImage(wrongImage, (turn)*15, 5, 15, 20);
-			var audio = new Audio('Sounds/oops.mp3');
-			audio.play();
 		}
 		
 	} 
@@ -587,7 +566,38 @@ function render(){
 }
 
 function start_game(){
-	init(); 
-	//carousel();
-	render();
+	carousel();
+}
+
+// Carousel -- 3 2 1 GO!!
+var myIndex = 0;
+function caroxusel() {
+	var ctxc = mycanvas.getContext("2d");
+	var img = new Image();
+	img.onload = function(){
+		  ctxc.drawImage(img,0,0);
+	};
+	img.src="Images/c" + myIndex + ".PNG"; 
+	var C = setTimeout(carousel, 1000); 
+	if (myIndex == 6){
+		clearTimeout(C); 
+	}
+}
+
+function carousel() {
+	var i;
+	var x = document.getElementsByClassName("mySlides");
+	for (i = 0; i < x.length; i++) {
+		x[i].style.display = "none";  
+	}
+	myIndex++;
+	if (myIndex > x.length) {
+		clearTimeout(C); 
+		init(); 
+		render();
+	}    
+	else{
+		x[myIndex-1].style.display = "block";
+		C = setTimeout(carousel, 1000); // Change image every 1 second
+	}
 }
