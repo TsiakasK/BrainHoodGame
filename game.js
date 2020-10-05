@@ -239,6 +239,9 @@ function BackToGame(){
 	wrapper.style.display= "block";
 	clear_sel();
 	ACTIVITY_LOG.push(["NEW", "0", performance.now()]); 
+	if (round == 21){ // 20 rounds total
+		window.alert("DONE");
+	}
 }
 
 function init(){
