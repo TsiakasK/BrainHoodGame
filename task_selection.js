@@ -20,7 +20,8 @@ function clear_sel(){
 	document.getElementById('t3').alt = "unchecked";
 	document.getElementById('t3').src = "Images/t3.png";
 	document.getElementById('t4').alt = "unchecked";
-	document.getElementById('t4').src = "Images/t4.png";	
+	document.getElementById('t4').src = "Images/t4.png";
+	olm_time = 0; 	
 }
 
 function image_check(img){
@@ -51,7 +52,6 @@ function image_check(img){
 		img.alt = "unchecked"
 		ACTIVITY_LOG.push([img.id, "1", performance.now()]);	
 	}
-	console.log(ACTIVITY_LOG); 
 }
 
 function get_params(){
@@ -149,10 +149,7 @@ scorec.width = mycanvas.width;
 scorec.height = 0.2*mycanvas.height;
 var params = [];
 scores = [0,0,0,0,0,0]; 
-round = 1;
-targetIDs = [];
-USER_shoot = []; 
-USER_move = [];  
+round = 1; 
 
 
 

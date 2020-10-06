@@ -93,15 +93,13 @@ function set_params(){
 	
 	// generate targets and expected responses
 	TARGETS = generate_targets(); 
-	EXPECTED = generate_response(); 
-	targetIDs.push(TARGETS.id); 
+	EXPECTED = generate_response();  
 	start_game(); 
 }
 
 function generate_targets(){
 	var rnd = Math.floor(Math.random() * 20) + (sel_params[5] - 1)*20; 
 	var mydata = arrayOfTargets[rnd];
-	console.log(rnd, mydata.id); 
 	var obj = {
         spots: mydata.tspots,
         types: mydata.ttypes,
@@ -209,24 +207,51 @@ function new_target(){
 			te = [round, sel_params[0], sel_params[1], sel_params[2], sel_params[3], sel_params[4], sel_params[5], round_scores[4], round_scores[5]]; 
 			table_entry.push(te);
 			updateTable(round, te); 
-			session_scores.push(round_scores); 
-			USER_shoot.push(user_response); 
-			USER_move.push(user_movement);
-			
-			var session_data = {
-				targetsIDs: targetIDs,
-				shoot: USER_shoot, 
-				move: USER_move, 
-				tselection: sel_params,
-				scores: session_scores
-			};	
-			
 		}
 		else{
-			mygame.style.display = "none"; 
+			mygame.style.display = "none";
+			push_data();
 			BackToGame();
 		}
+		
 	}	
+}
+
+function get_survey_data(){
+	
+	var q1 = document.getElementsByName("difficulty");  for (var i = 0; i< q1.length; i++) if (q1[i].checked) {v1 = q1[i].value; q1[i].checked = 0;} 
+	var q2 = document.getElementsByName("performance"); for (var i = 0; i< q2.length; i++) if (q2[i].checked) {v2 = q2[i].value; q2[i].checked = 0;} 
+	var q3 = document.getElementsByName("engagement");  for (var i = 0; i< q3.length; i++) if (q3[i].checked) {v3 = q3[i].value; q3[i].checked = 0;} 
+	var q4 = document.getElementsByName("preference");  for (var i = 0; i< q4.length; i++) if (q4[i].checked) {v4 = q4[i].value; q4[i].checked = 0;} 
+	var q5 = document.getElementsByName("rules");       for (var i = 0; i< q5.length; i++) if (q5[i].checked) {v5 = q5[i].value; q5[i].checked = 0;} 
+	
+	var survey_data = {
+		diff: v1, 
+		perf: v2, 
+		eng: v3, 
+		pref: v4, 
+		und: v5
+	}
+	push_data();
+	BackToGame();	
+}
+
+function push_data(){
+	var session_data = {
+		round: round,
+		practice: practice,
+		targetsID: TARGETS.id,				
+		shoot: user_response, 
+		move: user_movement, 
+		tselection: sel_params,
+		scores: round_scores,
+		OLM: olm_time
+	};
+	
+	console.log(ACTIVITY_LOG); // array - add to collection (activity_log)
+	console.log(session_data); // object - add to collection (session_data)	
+	console.log(survey_data); // object - add to collection (session_data OR survey_data)
+	ACTIVITY_LOG = []; 
 }
 
 function updateTable(r, data){

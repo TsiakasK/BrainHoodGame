@@ -534,8 +534,7 @@
 				}
 				else
 					pans[j].style.display = "none"; 
-			}
-			console.log(ACTIVITY_LOG); 
+			} 
 	  });
 	}
 	
@@ -603,7 +602,7 @@
 		modal.style.display = "none";
 		OLM_END_TIME = performance.now();
 		ACTIVITY_LOG.push(["VIEW_SCORES", "1", performance.now()]);
-		console.log(`Call to doSomething took ${(OLM_END_TIME - OLM_START_TIME)/1000} seconds.`);
+		olm_time += OLM_END_TIME - OLM_START_TIME;
 		var acc = document.getElementsByClassName("accordion");
 		reset_table_background();
 		for (var i = 0; i < acc.length; i++) 
@@ -703,37 +702,37 @@
 	<form action="#">
 		<h1>Round Finished!!!</h1>
 		<br><br>
-		<b>The task was:  </b> 
-		<input type="checkbox" name="cogparams" value="hec"> Too Easy  
-		<input type="checkbox" name="cogparams" value="ri"> Easy
-		<input type="checkbox" name="cogparams" value="wm"> OK 
-		<input type="checkbox" name="cogparams" value="ts"> Difficult	
-		<input type="checkbox" name="cogparams" value="ts"> Too Difficult
+		<b>The task was:&nbsp &nbsp</b> 
+		<input type="radio" name="difficulty" value="1"> Too Easy&nbsp 
+		<input type="radio" name="difficulty" value="2"> Easy&nbsp 
+		<input type="radio" name="difficulty" value="3"> OK&nbsp  
+		<input type="radio" name="difficulty" value="4"> Difficult&nbsp 	
+		<input type="radio" name="difficulty" value="5"> Too Difficult&nbsp 
 		<br><br><br>
-		<b>I think that my performance was: </b>
-		<input type="checkbox" name="cogparams" value="hec" checked> Bad  
-		<input type="checkbox" name="cogparams" value="ri"> Not Good
-		<input type="checkbox" name="cogparams" value="wm"> OK 
-		<input type="checkbox" name="cogparams" value="ts"> Pretty Good	
-		<input type="checkbox" name="cogparams" value="ts"> Great
+		<b>I think that my performance was:&nbsp &nbsp </b>
+		<input type="radio" name="performance" value="1"> Bad &nbsp  
+		<input type="radio" name="performance" value="2"> Not Good&nbsp 
+		<input type="radio" name="performance" value="3"> OK &nbsp 
+		<input type="radio" name="performance" value="4"> Pretty Good &nbsp 
+		<input type="radio" name="performance" value="5"> Great&nbsp 
 		<br><br><br>
-		<b>During the task I felt:  </b>
-		<input type="checkbox" name="cogparams" value="hec" checked> Stressed  
-		<input type="checkbox" name="cogparams" value="ri"> Engaged
-		<input type="checkbox" name="cogparams" value="wm"> Bored
+		<b>During the task I felt:&nbsp &nbsp  </b>
+		<input type="radio" name="engagement" value="1"> Stressed &nbsp  
+		<input type="radio" name="engagement" value="2"> Engaged&nbsp 
+		<input type="radio" name="engagement" value="3"> Bored&nbsp 
 		<br><br><br>		
-		<b>I really liked this task!  </b>
-		<input type="checkbox" name="cogparams" value="hec" checked> Not at all  
-		<input type="checkbox" name="cogparams" value="ri"> Not Sure
-		<input type="checkbox" name="cogparams" value="wm"> Yes
+		<b>I really liked this task!&nbsp &nbsp  </b>
+		<input type="radio" name="preference" value="1"> Not at all &nbsp  
+		<input type="radio" name="preference" value="2"> It was OK&nbsp 
+		<input type="radio" name="preference" value="3"> Yes&nbsp 
 		<br><br><br>	
-		<b>I did understood the rules!  </b>
-		<input type="checkbox" name="cogparams" value="hec" checked> Not at all  
-		<input type="checkbox" name="cogparams" value="ri"> Not Sure
-		<input type="checkbox" name="cogparams" value="wm"> Yes
+		<b>I did understood the rules! &nbsp &nbsp </b>
+		<input type="radio" name="rules" value="1"> Not at all  &nbsp 
+		<input type="radio" name="rules" value="2"> Not Sure&nbsp 
+		<input type="radio" name="rules" value="3"> Yes&nbsp 
 	</form>
 	<br><br>
-    <span class='start-btn' onClick="BackToGame();" width: 160px;"> Next!!! </span>
+    <span class='start-btn' onClick="get_survey_data();" width: 160px;"> Next!!! </span>
 	
 	</div>
 	</body>
