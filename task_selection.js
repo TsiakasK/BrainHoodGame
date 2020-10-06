@@ -150,6 +150,7 @@ scorec.height = 0.2*mycanvas.height;
 var params = [];
 scores = [0,0,0,0,0,0]; 
 round = 1; 
+attempt = 1; 
 
 
 

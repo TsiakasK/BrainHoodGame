@@ -194,9 +194,10 @@ function new_target(){
 		clearTimeout(A);
 		document.removeEventListener('keydown', buttonGotPressed);
 		gameover = true;
+		round_scores = estimate_scores(user_response, EXPECTED, user_movement);
+		attempt ++; 
 		if (practice == 0){
 			show_likert();
-			round_scores = estimate_scores(user_response, EXPECTED, user_movement);
 			document.getElementById("totalb").style.left = scores[5] + "px"; 
 			document.getElementById("score1b").style.left = scores[0]+ "px"; 
 			document.getElementById("score2b").style.left = scores[1]+ "px"; 
@@ -207,10 +208,13 @@ function new_target(){
 			te = [round, sel_params[0], sel_params[1], sel_params[2], sel_params[3], sel_params[4], sel_params[5], round_scores[4], round_scores[5]]; 
 			table_entry.push(te);
 			updateTable(round, te); 
+			round ++;
 		}
 		else{
 			mygame.style.display = "none";
+			survey_data = []; 
 			push_data();
+			practice = 0; 
 			BackToGame();
 		}
 		
@@ -225,7 +229,7 @@ function get_survey_data(){
 	var q4 = document.getElementsByName("preference");  for (var i = 0; i< q4.length; i++) if (q4[i].checked) {v4 = q4[i].value; q4[i].checked = 0;} 
 	var q5 = document.getElementsByName("rules");       for (var i = 0; i< q5.length; i++) if (q5[i].checked) {v5 = q5[i].value; q5[i].checked = 0;} 
 	
-	var survey_data = {
+	survey_data = {
 		diff: v1, 
 		perf: v2, 
 		eng: v3, 
@@ -238,7 +242,8 @@ function get_survey_data(){
 
 function push_data(){
 	var session_data = {
-		round: round,
+		round: round-1,
+		attempt: attempt-1,
 		practice: practice,
 		targetsID: TARGETS.id,				
 		shoot: user_response, 
@@ -284,7 +289,7 @@ function BackToGame(){
 }
 
 function init(){
-	turn = -1;  
+	turn = -1; 	
 	shoot = 0; 
 	moved = 0;
 	wait = 0; 
@@ -540,15 +545,17 @@ function estimate_scores(user, all_responses, movement){
 		s[3] = s[4]; // 0 - 20
 	}	
 	
-	scores[0] += s[0]*speed_factor*diff_factor;
-	scores[1] += s[1]*speed_factor*diff_factor;
-	scores[2] += s[2]*speed_factor*diff_factor;
-	scores[3] += s[3]*speed_factor*diff_factor;
-	scores[4] += s[4];
+	if (practice == 0){
+		scores[0] += s[0]*speed_factor*diff_factor;
+		scores[1] += s[1]*speed_factor*diff_factor;
+		scores[2] += s[2]*speed_factor*diff_factor;
+		scores[3] += s[3]*speed_factor*diff_factor;
+		scores[4] += s[4];	
+	}
 	cpoints = ( s[0]*speed_factor*diff_factor + s[1]*speed_factor*diff_factor + s[2]*speed_factor*diff_factor + s[3]*speed_factor*diff_factor)/4.0; 
 	cpoints = Math.round(cpoints * 10) / 10; 
-	scores[5] += cpoints;
-	
+	if (practice == 0)
+		scores[5] += cpoints;
 	return [s[0]*speed_factor*diff_factor, s[1]*speed_factor*diff_factor, s[2]*speed_factor*diff_factor, s[3]*speed_factor*diff_factor, s[4], cpoints];
 	
 }
@@ -591,10 +598,6 @@ function render(){
 	draw();
 	update();
 	if (gameover == true){
-		if (practice == 0)
-			round ++; 
-		else 
-			practice = 0; 
 		player = {}; 
 		gameover = false;
 	}
