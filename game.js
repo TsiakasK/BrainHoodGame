@@ -230,6 +230,8 @@ function get_survey_data(){
 	var q5 = document.getElementsByName("rules");       for (var i = 0; i< q5.length; i++) if (q5[i].checked) {v5 = q5[i].value; q5[i].checked = 0;} 
 	
 	survey_data = {
+		id: 1212121, 
+		round: round-1, 
 		diff: v1, 
 		perf: v2, 
 		eng: v3, 
@@ -242,6 +244,7 @@ function get_survey_data(){
 
 function push_data(){
 	var session_data = {
+		id: 123123,
 		round: round-1,
 		attempt: attempt-1,
 		practice: practice,
