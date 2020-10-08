@@ -55,11 +55,11 @@ function set_params(){
 	
 	stimuli_speed = -1; 
 	if (sel_params[4] == 1){
-		stimuli_speed = 3500;
+		stimuli_speed = 200;
 		speed_factor = 0.7; 
 	}		
 	else if (sel_params[4] == 2){
-		stimuli_speed = 3000; 
+		stimuli_speed = 200; 
 		speed_factor = 0.8; 
 	}
 	else if (sel_params[4] == 3){
@@ -204,7 +204,8 @@ function new_target(){
 			document.getElementById("score3b").style.left = scores[2]+ "px"; 
 			document.getElementById("score4b").style.left = scores[3]+ "px";
 			document.getElementById("screen_score").innerHTML = "Total Points Earned: " +  Math.round(scores[5] * 10) / 10;
-			document.getElementById("screen_rounds").innerHTML = "Rounds Played: " + round + "/20";
+			document.getElementById("screen_prounds").innerHTML = "Practice Rounds Played: 7";
+			document.getElementById("screen_rounds").innerHTML = "Rounds Played: " + round + "/20" ;
 			te = [round, sel_params[0], sel_params[1], sel_params[2], sel_params[3], sel_params[4], sel_params[5], round_scores[4], round_scores[5]]; 
 			table_entry.push(te);
 			updateTable(round, te); 
@@ -267,7 +268,7 @@ function updateTable(r, data){
 	if (data[2] == 1) tmp = 'X'; else tmp = '-'; var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(2,10)].innerHTML=tmp;
 	if (data[3] == 1) tmp = 'X'; else tmp = '-'; var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(3,10)].innerHTML=tmp;	
 	if (data[4] == 1) tmp = 'X'; else tmp = '-'; var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(4,10)].innerHTML=tmp;
-	if (data[5] == 1) tmp = 'slow (1/3)'; else if (data[5] == 2) tmp = "medium (2/3)";  else tmp = 'fast (3/3)';
+	if (data[5] == 1) tmp = 'slow'; else if (data[5] == 2) tmp = "medium";  else tmp = 'fast';
 	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(5,10)].innerHTML=tmp;
 	if (data[6] == 1) tmp = 'three (3)'; else if (data[6] == 2) tmp = "five (5)";  else tmp = 'seven (7)';
 	var x=document.getElementById('tg-PdFaH').rows[parseInt(r,10)].cells; x[parseInt(6,10)].innerHTML=tmp;
