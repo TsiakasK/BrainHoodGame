@@ -87,6 +87,7 @@ function get_params(){
 function practice_round(){
 	ACTIVITY_LOG.push(["PRACTICE", "0", performance.now()]); 
 	practice = 1; 
+	prounds += 1; 
 	play_sel(); 
 }
 
@@ -151,6 +152,7 @@ var params = [];
 scores = [0,0,0,0,0,0]; 
 round = 1; 
 attempt = 1; 
+prounds = 0; 
 
 
 

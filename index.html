@@ -21,9 +21,9 @@
 	
 	<div id="mySidenav" class="sidenav">
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	  <a href="#">Start</a>
-	  <a href="#" onclick="myFunction()" > How to Play</a>
-	  <a href="#">Exit</a>
+	  <a href="#" onclick="myFunction()" >How to Play</a>
+	  <a href="#" onclick="pause_game()">Pause</a>
+	  <a href="#" onclick="window.close()">Exit</a>
 	</div>
 
 
@@ -122,7 +122,7 @@
 			
 			<h3> Game Progress</h3>
 			<div id = "screen_rounds">Rounds Played: 0/20</div>	
-			<div id = "screen_prounds">Practice Rounds Played: 4</div><br>			
+			<div id = "screen_prounds">Practice Rounds Played: 0</div><br>			
 			<div id = "screen_score">Total Points Earned: 0 </div>			
 		</div>		
 		
@@ -440,7 +440,7 @@
 		<div id="tutorial" class="modal" >
 			<!-- Modal content -->
 			<div class="modal-content" style="height: 550px; background-color: grey; padding-left: 200px; padding-top: 50px; ">
-				<span class="close">&times;</span>
+				<span id= "close2" class="close">&times;</span>
 				<div id="tutorial_pic" style="width: 80%; height: 100%; text-align: center;  background-size: 100% 100%; background-color: grey; ">
 				</div>
 			</div>
@@ -474,9 +474,17 @@
 	<script type= "text/javascript" src= "https://www.gstatic.com/charts/loader.js"> </script>
 	
 	<script>
+	function pause_game(){
+		ACTIVITY_LOG.push(["PAUSE", "0", performance.now()]); 
+		closeNav();
+		window.alert("Game Paused! Press OK to resume!"); 
+		ACTIVITY_LOG.push(["PAUSE", "1", performance.now()]);
+		console.log(ACTIVITY_LOG); 
+	}
+	
+	
 	// ACTIVITY LOG 
 	ACTIVITY_LOG = [["NEW", "0", performance.now()]]; 
-	
 	
 	//  time spent on OLM buttons [total, t, t1, t2, t3, t4]
 	olm_time = 0; 
@@ -503,11 +511,13 @@
 		popup.classList.toggle("show");
 		if (popup.paused){ 
 			popup.play(); 
+			ACTIVITY_LOG.push(["VIDEO", "0", performance.now()]);
 			document.getElementById("closeVideo").style.display = "block"; 
 			document.getElementById("howtoplay").style.display = "block";
 			}
 		  else{ 
 			popup.load();
+			ACTIVITY_LOG.push(["VIDEO", "1", performance.now()]);
 			document.getElementById("closeVideo").style.display = "none"; 
 			document.getElementById("howtoplay").style.display = "none";
 		} 

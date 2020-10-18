@@ -55,15 +55,15 @@ function set_params(){
 	
 	stimuli_speed = -1; 
 	if (sel_params[4] == 1){
-		stimuli_speed = 200;
+		stimuli_speed = 3000;
 		speed_factor = 0.7; 
 	}		
 	else if (sel_params[4] == 2){
-		stimuli_speed = 200; 
+		stimuli_speed = 2500; 
 		speed_factor = 0.8; 
 	}
 	else if (sel_params[4] == 3){
-		stimuli_speed = 200; 
+		stimuli_speed = 2000; 
 		speed_factor = 1; 
 	}
 	
@@ -193,9 +193,8 @@ function new_target(){
 		window.alert("Round Finished");
 		clearTimeout(A);
 		document.removeEventListener('keydown', buttonGotPressed);
-		gameover = true;
 		round_scores = estimate_scores(user_response, EXPECTED, user_movement);
-		attempt ++; 
+		
 		if (practice == 0){
 			show_likert();
 			document.getElementById("totalb").style.left = scores[5] + "px"; 
@@ -204,7 +203,6 @@ function new_target(){
 			document.getElementById("score3b").style.left = scores[2]+ "px"; 
 			document.getElementById("score4b").style.left = scores[3]+ "px";
 			document.getElementById("screen_score").innerHTML = "Total Points Earned: " +  Math.round(scores[5] * 10) / 10;
-			document.getElementById("screen_prounds").innerHTML = "Practice Rounds Played: 7";
 			document.getElementById("screen_rounds").innerHTML = "Rounds Played: " + round + "/20" ;
 			te = [round, sel_params[0], sel_params[1], sel_params[2], sel_params[3], sel_params[4], sel_params[5], round_scores[4], round_scores[5]]; 
 			table_entry.push(te);
@@ -212,35 +210,42 @@ function new_target(){
 			round ++;
 		}
 		else{
-			mygame.style.display = "none";
+			mygame.style.display = "none"; 
+			document.getElementById("screen_prounds").innerHTML = "Practice Rounds Played: " + prounds;
 			survey_data = []; 
 			push_data();
 			practice = 0; 
 			BackToGame();
 		}
-		
+		gameover = true;
+		attempt ++; 
 	}	
 }
 
 function get_survey_data(){
 	
-	var q1 = document.getElementsByName("difficulty");  for (var i = 0; i< q1.length; i++) if (q1[i].checked) {v1 = q1[i].value; q1[i].checked = 0;} 
-	var q2 = document.getElementsByName("performance"); for (var i = 0; i< q2.length; i++) if (q2[i].checked) {v2 = q2[i].value; q2[i].checked = 0;} 
-	var q3 = document.getElementsByName("engagement");  for (var i = 0; i< q3.length; i++) if (q3[i].checked) {v3 = q3[i].value; q3[i].checked = 0;} 
-	var q4 = document.getElementsByName("preference");  for (var i = 0; i< q4.length; i++) if (q4[i].checked) {v4 = q4[i].value; q4[i].checked = 0;} 
-	var q5 = document.getElementsByName("rules");       for (var i = 0; i< q5.length; i++) if (q5[i].checked) {v5 = q5[i].value; q5[i].checked = 0;} 
+	var q1 = document.getElementsByName("difficulty");  var v1 = 0; for (var i = 0; i< q1.length; i++) if (q1[i].checked) {v1 = q1[i].value; q1[i].checked = 0;} 
+	var q2 = document.getElementsByName("performance"); var v2 = 0; for (var i = 0; i< q2.length; i++) if (q2[i].checked) {v2 = q2[i].value; q2[i].checked = 0;} 
+	var q3 = document.getElementsByName("engagement");  var v3 = 0; for (var i = 0; i< q3.length; i++) if (q3[i].checked) {v3 = q3[i].value; q3[i].checked = 0;} 
+	var q4 = document.getElementsByName("preference");  var v4 = 0; for (var i = 0; i< q4.length; i++) if (q4[i].checked) {v4 = q4[i].value; q4[i].checked = 0;} 
+	var q5 = document.getElementsByName("rules");       var v5 = 0; for (var i = 0; i< q5.length; i++) if (q5[i].checked) {v5 = q5[i].value; q5[i].checked = 0;} 
 	
-	survey_data = {
-		id: 1212121, 
-		round: round-1, 
-		diff: v1, 
-		perf: v2, 
-		eng: v3, 
-		pref: v4, 
-		und: v5
+	if (v1 && v2 && v3 && v4 && v5){
+		survey_data = {
+			id: 1212121, 
+			round: round-1, 
+			diff: v1, 
+			perf: v2, 
+			eng: v3, 
+			pref: v4, 
+			und: v5
+		}
+		
+		push_data();
+		BackToGame();	
 	}
-	push_data();
-	BackToGame();	
+	else
+		window.alert("Please answer all questions");
 }
 
 function push_data(){
