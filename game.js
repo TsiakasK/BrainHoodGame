@@ -224,13 +224,15 @@ function new_target(){
 
 function get_survey_data(){
 	
-	var q1 = document.getElementsByName("difficulty");  var v1 = 0; for (var i = 0; i< q1.length; i++) if (q1[i].checked) {v1 = q1[i].value; q1[i].checked = 0;} 
-	var q2 = document.getElementsByName("performance"); var v2 = 0; for (var i = 0; i< q2.length; i++) if (q2[i].checked) {v2 = q2[i].value; q2[i].checked = 0;} 
-	var q3 = document.getElementsByName("engagement");  var v3 = 0; for (var i = 0; i< q3.length; i++) if (q3[i].checked) {v3 = q3[i].value; q3[i].checked = 0;} 
-	var q4 = document.getElementsByName("preference");  var v4 = 0; for (var i = 0; i< q4.length; i++) if (q4[i].checked) {v4 = q4[i].value; q4[i].checked = 0;} 
-	var q5 = document.getElementsByName("rules");       var v5 = 0; for (var i = 0; i< q5.length; i++) if (q5[i].checked) {v5 = q5[i].value; q5[i].checked = 0;} 
+	var q1 = document.getElementsByName("difficulty");  var v1 = 0; for (var i = 0; i< q1.length; i++) if (q1[i].checked) {v1 = q1[i].value; var i1 = i;} 
+	var q2 = document.getElementsByName("performance"); var v2 = 0; for (var i = 0; i< q2.length; i++) if (q2[i].checked) {v2 = q2[i].value; var i2 = i;} 
+	var q3 = document.getElementsByName("engagement");  var v3 = 0; for (var i = 0; i< q3.length; i++) if (q3[i].checked) {v3 = q3[i].value; var i3 = i;} 
+	var q4 = document.getElementsByName("preference");  var v4 = 0; for (var i = 0; i< q4.length; i++) if (q4[i].checked) {v4 = q4[i].value; var i4 = i;} 
+	var q5 = document.getElementsByName("rules");       var v5 = 0; for (var i = 0; i< q5.length; i++) if (q5[i].checked) {v5 = q5[i].value; var i5 = i;} 
 	
 	if (v1 && v2 && v3 && v4 && v5){
+		q1[i1].checked = 0; q2[i2].checked = 0; q3[i3].checked = 0; q4[i4].checked = 0; q5[i5].checked = 0;
+		
 		survey_data = {
 			id: 1212121, 
 			round: round-1, 

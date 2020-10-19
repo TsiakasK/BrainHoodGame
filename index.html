@@ -523,6 +523,14 @@
 		} 
 	}
 	
+	var popup = document.getElementById("myPopup");
+	popup.onended = function() {
+		popup.load();
+		ACTIVITY_LOG.push(["VIDEO", "2", performance.now()]);
+		document.getElementById("closeVideo").style.display = "none"; 
+		document.getElementById("howtoplay").style.display = "none";
+	}; 
+	
 	// OPEN LEARNER MODEL
 	var acc = document.getElementsByClassName("accordion");
 	for (var i = 0; i < acc.length; i++) { 
@@ -530,11 +538,11 @@
 			reset_table_background(); 
 			var panel = this.nextElementSibling;
 			if (panel.style.display == "block"){
-				ACTIVITY_LOG.push([panel.id, "1", performance.now()]) 
+				ACTIVITY_LOG.push([panel.id, "1", performance.now()]); 
 				panel.style.display = "none";
 			}else{
 				panel.style.display = "block";
-				ACTIVITY_LOG.push([panel.id, "0", performance.now()])
+				ACTIVITY_LOG.push([panel.id, "0", performance.now()]);
 				//start_times[i] = performance.now(); 
 			}
 			var pans = document.getElementsByClassName("panel2");
