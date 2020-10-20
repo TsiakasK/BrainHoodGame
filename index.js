@@ -1,10 +1,39 @@
 function authenticate() {
   console.log('authenticate');
+  fetch('https://stitch.mongodb.com/api/client/v2.0/app/brainhoodgame-xdgsw/auth/providers/anon-user/login', {
+    method: 'POST',
+  })
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      } else {
+        alert('Could not loggin user');
+      }
+    })
+    .then(function (data) {
+      localStorage.setItem('userToken', data.access_token);
+      fetch('https://stitch.mongodb.com/api/client/v2.0/auth/profile', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${data.access_token}`,
+        },
+      })
+        .then(function (res) {
+          console.log({res});
+        })
+        .catch((err) => console.log({err}));
+    })
+    .catch((error) => console.log({error}));
+  // 2. GET  @ stitch.mongodb.com/api/client/v2.0/auth/profile
 }
 
 function postMock() {
   fetch('https://realm.mongodb.com/api/client/v2.0/app/brainhoodgame-xdgsw/graphql', {
     method: 'POST',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+    },
+    // TODO: create proper query
     data: {},
   }).then(function (response) {
     console.log({response});
