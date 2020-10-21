@@ -234,7 +234,7 @@ function get_survey_data(){
 		q1[i1].checked = 0; q2[i2].checked = 0; q3[i3].checked = 0; q4[i4].checked = 0; q5[i5].checked = 0;
 		
 		survey_data = {
-			id: 1212121, 
+			id: id, 
 			round: round-1, 
 			diff: v1, 
 			perf: v2, 
@@ -252,7 +252,7 @@ function get_survey_data(){
 
 function push_data(){
 	var session_data = {
-		id: 123123,
+		id: id,
 		round: round-1,
 		attempt: attempt-1,
 		practice: practice,
@@ -263,10 +263,11 @@ function push_data(){
 		scores: round_scores,
 		OLM: olm_time
 	};
-	
+	// ACTIVIITY -- [id, attempt, activity, status, timestamp]
 	console.log(ACTIVITY_LOG); // array - add to collection (activity_log)
-	console.log(session_data); // object - add to collection (session_data)	
-	console.log(survey_data); // object - add to collection (session_data OR survey_data)
+	console.log(session_data); // object - add to collection (session_data)
+	if (practice == 0)
+		console.log(survey_data); // object - add to collection if not practice (session_data OR survey_data)
 	ACTIVITY_LOG = []; 
 }
 
@@ -292,7 +293,7 @@ function BackToGame(){
 	document.getElementById("myForm").style.display = "none";
 	wrapper.style.display= "block";
 	clear_sel();
-	ACTIVITY_LOG.push(["NEW", "0", performance.now()]); 
+	ACTIVITY_LOG.push([id, attempt, "NEW", "0", performance.now()]); 
 	if (round == 21){ // 20 rounds total
 		window.alert("SESSION DONE");	
 		// targetIDs
@@ -300,6 +301,7 @@ function BackToGame(){
 }
 
 function init(){
+	window.focus(); 
 	turn = -1; 	
 	shoot = 0; 
 	moved = 0;

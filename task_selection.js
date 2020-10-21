@@ -44,20 +44,20 @@ function image_check(img){
 		}
 		img.src = "Images/" + img.id + "_checked.png"; 
 		img.alt = "checked"
-		ACTIVITY_LOG.push([img.id, "0", performance.now()]); 
+		ACTIVITY_LOG.push([id, attempt, img.id, "0", performance.now()]); 
 	}
 	else{
 		name = "Images/" + img.id + ".png";
 		img.src = "Images/" + img.id + ".png";
 		img.alt = "unchecked"
-		ACTIVITY_LOG.push([img.id, "1", performance.now()]);	
+		ACTIVITY_LOG.push([id, attempt, img.id, "1", performance.now()]);	
 	}
 }
 
 function get_params(){
 	sel_params = []; 
 	for(var i = 0; i < 4; i++){
-		id = "t" + String(i+1);
+		var id = "t" + String(i+1);
 		name = document.getElementById(id).alt; 
 		if (document.getElementById(id).alt == "unchecked")
 			sel_params.push(0);
@@ -67,7 +67,7 @@ function get_params(){
 	
 	speed = -1; 
 	for(var i = 0; i < 3; i++){
-		id = "s" + String(i+1);
+		var id = "s" + String(i+1);
 		name = document.getElementById(id).alt; 
 		if (document.getElementById(id).alt == "checked")
 			sel_params.push(i+1);
@@ -75,7 +75,7 @@ function get_params(){
 	
 	diff = -1; 
 	for(var i = 0; i < 3; i++){
-		id = "d" + String(i+1);
+		var id = "d" + String(i+1);
 		name = document.getElementById(id).alt; 
 		if (document.getElementById(id).alt == "checked")
 			sel_params.push(i+1);
@@ -85,7 +85,7 @@ function get_params(){
 }
 
 function practice_round(){
-	ACTIVITY_LOG.push(["PRACTICE", "0", performance.now()]); 
+	ACTIVITY_LOG.push([id, attempt, "PRACTICE", "0", performance.now()]); 
 	practice = 1; 
 	prounds += 1; 
 	play_sel(); 
@@ -98,7 +98,7 @@ function play_sel(){
 		wrapper.style.display='none';
 		set_params();
 		if (practice == 0)
-			ACTIVITY_LOG.push(["PLAY", "0", performance.now()]); 
+			ACTIVITY_LOG.push([id, attempt, "PLAY", "0", performance.now()]); 
 	}
 }
 

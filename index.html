@@ -474,17 +474,21 @@
 	<script type= "text/javascript" src= "https://www.gstatic.com/charts/loader.js"> </script>
 	
 	<script>
+	
+	// Generate uniqueID
+	id = Date.now() + Math.floor(Math.random() * 100); 
+	
 	function pause_game(){
-		ACTIVITY_LOG.push(["PAUSE", "0", performance.now()]); 
+		ACTIVITY_LOG.push([id, attempt, "PAUSE", "0", performance.now()]); 
 		closeNav();
 		window.alert("Game Paused! Press OK to resume!"); 
-		ACTIVITY_LOG.push(["PAUSE", "1", performance.now()]);
-		console.log(ACTIVITY_LOG); 
+		ACTIVITY_LOG.push([id, attempt, "PAUSE", "1", performance.now()]);
+		//console.log(ACTIVITY_LOG); 
 	}
 	
 	
 	// ACTIVITY LOG 
-	ACTIVITY_LOG = [["NEW", "0", performance.now()]]; 
+	ACTIVITY_LOG = [[id, 0, "NEW", "0", performance.now()]]; 
 	
 	//  time spent on OLM buttons [total, t, t1, t2, t3, t4]
 	olm_time = 0; 
@@ -511,13 +515,13 @@
 		popup.classList.toggle("show");
 		if (popup.paused){ 
 			popup.play(); 
-			ACTIVITY_LOG.push(["VIDEO", "0", performance.now()]);
+			ACTIVITY_LOG.push([id, attempt, "VIDEO", "0", performance.now()]);
 			document.getElementById("closeVideo").style.display = "block"; 
 			document.getElementById("howtoplay").style.display = "block";
 			}
 		  else{ 
 			popup.load();
-			ACTIVITY_LOG.push(["VIDEO", "1", performance.now()]);
+			ACTIVITY_LOG.push([id, attempt, "VIDEO", "1", performance.now()]);
 			document.getElementById("closeVideo").style.display = "none"; 
 			document.getElementById("howtoplay").style.display = "none";
 		} 
@@ -526,7 +530,7 @@
 	var popup = document.getElementById("myPopup");
 	popup.onended = function() {
 		popup.load();
-		ACTIVITY_LOG.push(["VIDEO", "2", performance.now()]);
+		ACTIVITY_LOG.push([id, attempt, "VIDEO", "2", performance.now()]);
 		document.getElementById("closeVideo").style.display = "none"; 
 		document.getElementById("howtoplay").style.display = "none";
 	}; 
@@ -538,11 +542,11 @@
 			reset_table_background(); 
 			var panel = this.nextElementSibling;
 			if (panel.style.display == "block"){
-				ACTIVITY_LOG.push([panel.id, "1", performance.now()]); 
+				ACTIVITY_LOG.push([id, attempt, panel.id, "1", performance.now()]); 
 				panel.style.display = "none";
 			}else{
 				panel.style.display = "block";
-				ACTIVITY_LOG.push([panel.id, "0", performance.now()]);
+				ACTIVITY_LOG.push([id, attempt, panel.id, "0", performance.now()]);
 				//start_times[i] = performance.now(); 
 			}
 			var pans = document.getElementsByClassName("panel2");
@@ -604,7 +608,7 @@
 		document.getElementById("score4").width = scores[3];
 		
 		modal.style.display = "block";
-		ACTIVITY_LOG.push(["VIEW_SCORES", "0", performance.now()]); 
+		ACTIVITY_LOG.push([id, attempt, "VIEW_SCORES", "0", performance.now()]); 
 	}
 	
 	// When the user clicks the button, open the modal 
@@ -613,14 +617,14 @@
 	  var tID = pp.slice(0,4).join(""); 
 	  tut_pic.style.backgroundImage = "url(Images/tutorial_" + tID + ".png)";
 	  tut_modal.style.display = "block";
-	  ACTIVITY_LOG.push(["RULES", "0", performance.now()]); 
+	  ACTIVITY_LOG.push([id, attempt, "RULES", "0", performance.now()]); 
 	}
 
 	// When the user clicks on <span> (x), close the modal
 	span1.onclick = function() {
 		modal.style.display = "none";
 		OLM_END_TIME = performance.now();
-		ACTIVITY_LOG.push(["VIEW_SCORES", "1", performance.now()]);
+		ACTIVITY_LOG.push([id, attempt, "VIEW_SCORES", "1", performance.now()]);
 		olm_time += OLM_END_TIME - OLM_START_TIME;
 		var acc = document.getElementsByClassName("accordion");
 		reset_table_background();
@@ -631,7 +635,7 @@
 	// When the user clicks on <span> (x), close the modal
 	span2.onclick = function() {
 	  tut_modal.style.display = "none";
-	  ACTIVITY_LOG.push(["RULES", "1", performance.now()]); 
+	  ACTIVITY_LOG.push([id, attempt, "RULES", "1", performance.now()]); 
 	}
 
 	// When the user clicks anywhere outside of the modal, close it
