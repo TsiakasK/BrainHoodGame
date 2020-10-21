@@ -41,6 +41,7 @@ function postMock() {
 }
 
 // Generate uniqueID
+authenticate();
 id = Date.now() + Math.floor(Math.random() * 100); 
 
 function pause_game(){
