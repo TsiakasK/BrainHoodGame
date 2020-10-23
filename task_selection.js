@@ -44,13 +44,13 @@ function image_check(img){
 		}
 		img.src = "Images/" + img.id + "_checked.png"; 
 		img.alt = "checked"
-		ACTIVITY_LOG.push([id, attempt, img.id, "0", performance.now()]); 
+		ACTIVITY_LOG.push([id, attempt, img.id, "0", performance.now().toString()]); 
 	}
 	else{
 		name = "Images/" + img.id + ".png";
 		img.src = "Images/" + img.id + ".png";
 		img.alt = "unchecked"
-		ACTIVITY_LOG.push([id, attempt, img.id, "1", performance.now()]);	
+		ACTIVITY_LOG.push([id, attempt, img.id, "1", performance.now().toString()]);	
 	}
 }
 
@@ -85,7 +85,7 @@ function get_params(){
 }
 
 function practice_round(){
-	ACTIVITY_LOG.push([id, attempt, "PRACTICE", "0", performance.now()]); 
+	ACTIVITY_LOG.push([id, attempt, "PRACTICE", "0", performance.now().toString()]); 
 	practice = 1; 
 	prounds += 1; 
 	play_sel(); 
@@ -98,7 +98,7 @@ function play_sel(){
 		wrapper.style.display='none';
 		set_params();
 		if (practice == 0)
-			ACTIVITY_LOG.push([id, attempt, "PLAY", "0", performance.now()]); 
+			ACTIVITY_LOG.push([id, attempt, "PLAY", "0", performance.now().toString()]); 
 	}
 }
 

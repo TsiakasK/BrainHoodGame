@@ -35,12 +35,20 @@ function postSession(sessionData) {
   postMutation('AddSession', AddSessionQuery, variables);
 }
 
-function postSurvey() {
-  // TODO:
+function postSurvey(surveyData) {
+  const variables = {survey: surveyData};
+  const AddSurveyQuery =
+    'mutation AddSurvey($survey: SurveyInsertInput!) { insertOneSurvey(data: $survey) {round id	performance preference difficulty rules engagement}}';
+
+  postMutation('AddSurvey', AddSurveyQuery, variables);
 }
 
-function postLog() {
-  // TODO:
+function postLog(logData) {
+  const variables = {log: logData};
+  const AddLogQuery =
+    'mutation AddLog($log: Session_activity_logInsertInput!) { insertOneSession_activity_log(data: $log) {id attempt activity status timestamp}}';
+
+  postMutation('AddLog', AddLogQuery, variables);
 }
 
 function postMutation(operationName, query, variables) {
@@ -61,18 +69,18 @@ function postMutation(operationName, query, variables) {
 
 // Generate uniqueID
 authenticate();
-id = Date.now() + Math.floor(Math.random() * 100);
+id = Math.random().toString(36).substr(2, 5) + Date.now() + Math.random().toString(36).substr(2, 5) + Math.floor(Math.random() * 10) + Math.random().toString(36).substr(2, 5);
 
 function pause_game() {
-  ACTIVITY_LOG.push([id, attempt, 'PAUSE', '0', performance.now()]);
+  ACTIVITY_LOG.push([id, attempt, 'PAUSE', '0', performance.now().toString()]);
   closeNav();
   window.alert('Game Paused! Press OK to resume!');
-  ACTIVITY_LOG.push([id, attempt, 'PAUSE', '1', performance.now()]);
+  ACTIVITY_LOG.push([id, attempt, 'PAUSE', '1', performance.now().toString()]);
   //console.log(ACTIVITY_LOG);
 }
 
 // ACTIVITY LOG
-ACTIVITY_LOG = [[id, 0, 'NEW', '0', performance.now()]];
+ACTIVITY_LOG = [[id, 0, 'NEW', '0', performance.now().toString()]];
 
 //  time spent on OLM buttons [total, t, t1, t2, t3, t4]
 olm_time = 0;
@@ -99,12 +107,12 @@ function myFunction() {
   popup.classList.toggle('show');
   if (popup.paused) {
     popup.play();
-    ACTIVITY_LOG.push([id, attempt, 'VIDEO', '0', performance.now()]);
+    ACTIVITY_LOG.push([id, attempt, 'VIDEO', '0', performance.now().toString()]);
     document.getElementById('closeVideo').style.display = 'block';
     document.getElementById('howtoplay').style.display = 'block';
   } else {
     popup.load();
-    ACTIVITY_LOG.push([id, attempt, 'VIDEO', '1', performance.now()]);
+    ACTIVITY_LOG.push([id, attempt, 'VIDEO', '1', performance.now().toString()]);
     document.getElementById('closeVideo').style.display = 'none';
     document.getElementById('howtoplay').style.display = 'none';
   }
@@ -113,7 +121,7 @@ function myFunction() {
 var popup = document.getElementById('myPopup');
 popup.onended = function () {
   popup.load();
-  ACTIVITY_LOG.push([id, attempt, 'VIDEO', '2', performance.now()]);
+  ACTIVITY_LOG.push([id, attempt, 'VIDEO', '2', performance.now().toString()]);
   document.getElementById('closeVideo').style.display = 'none';
   document.getElementById('howtoplay').style.display = 'none';
 };
@@ -125,12 +133,12 @@ for (var i = 0; i < acc.length; i++) {
     reset_table_background();
     var panel = this.nextElementSibling;
     if (panel.style.display == 'block') {
-      ACTIVITY_LOG.push([id, attempt, panel.id, '1', performance.now()]);
+      ACTIVITY_LOG.push([id, attempt, panel.id, '1', performance.now().toString()]);
       panel.style.display = 'none';
     } else {
       panel.style.display = 'block';
-      ACTIVITY_LOG.push([id, attempt, panel.id, '0', performance.now()]);
-      //start_times[i] = performance.now();
+      ACTIVITY_LOG.push([id, attempt, panel.id, '0', performance.now().toString()]);
+      //start_times[i] = performance.now().toString();
     }
     var pans = document.getElementsByClassName('panel2');
     for (var j = 0; j < pans.length; j++) {
@@ -189,7 +197,7 @@ btn.onclick = function () {
   document.getElementById('score4').width = scores[3];
 
   modal.style.display = 'block';
-  ACTIVITY_LOG.push([id, attempt, 'VIEW_SCORES', '0', performance.now()]);
+  ACTIVITY_LOG.push([id, attempt, 'VIEW_SCORES', '0', performance.now().toString()]);
 };
 
 // When the user clicks the button, open the modal
@@ -198,14 +206,14 @@ tut_btn.onclick = function () {
   var tID = pp.slice(0, 4).join('');
   tut_pic.style.backgroundImage = 'url(Images/tutorial_' + tID + '.png)';
   tut_modal.style.display = 'block';
-  ACTIVITY_LOG.push([id, attempt, 'RULES', '0', performance.now()]);
+  ACTIVITY_LOG.push([id, attempt, 'RULES', '0', performance.now().toString()]);
 };
 
 // When the user clicks on <span> (x), close the modal
 span1.onclick = function () {
   modal.style.display = 'none';
   OLM_END_TIME = performance.now();
-  ACTIVITY_LOG.push([id, attempt, 'VIEW_SCORES', '1', performance.now()]);
+  ACTIVITY_LOG.push([id, attempt, 'VIEW_SCORES', '1', performance.now().toString()]);
   olm_time += OLM_END_TIME - OLM_START_TIME;
   var acc = document.getElementsByClassName('accordion');
   reset_table_background();
@@ -215,7 +223,7 @@ span1.onclick = function () {
 // When the user clicks on <span> (x), close the modal
 span2.onclick = function () {
   tut_modal.style.display = 'none';
-  ACTIVITY_LOG.push([id, attempt, 'RULES', '1', performance.now()]);
+  ACTIVITY_LOG.push([id, attempt, 'RULES', '1', performance.now().toString()]);
 };
 
 // When the user clicks anywhere outside of the modal, close it

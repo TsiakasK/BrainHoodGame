@@ -276,11 +276,11 @@ function get_survey_data() {
     survey_data = {
       id: id,
       round: round - 1,
-      diff: v1,
-      perf: v2,
-      eng: v3,
-      pref: v4,
-      und: v5,
+      difficulty: v1,
+      performance: v2,
+      engagement: v3,
+      preference: v4,
+      rules: v5,
     };
 
     push_data();
@@ -299,13 +299,24 @@ function push_data() {
     move: user_movement,
     tselection: sel_params,
     scores: round_scores,
-    OLM: olm_time,
+    OLM: olm_time.toString(),
   };
   // ACTIVIITY -- [id, attempt, activity, status, timestamp]
-  console.log(ACTIVITY_LOG); // array - add to collection (activity_log)
-  console.log(session_data); // object - add to collection (session_data)
+  //console.log(ACTIVITY_LOG); // array - add to collection (activity_log)
+  //console.log(session_data); // object - add to collection (session_data)
+  ACTIVITY_LOG.forEach(function(entry){
+	  var log_data = {
+		  id: id,
+		  attempt: attempt -1,
+		  activity: entry[2], 
+		  status: entry[3], 
+		  timestamp: entry[4],		
+	  };
+	  postLog(log_data);
+  });
   postSession(session_data);
-  if (practice == 0) console.log(survey_data); // object - add to collection if not practice (session_data OR survey_data)
+  
+  if (practice == 0) postSurvey(survey_data); // object - add to collection if not practice (session_data OR survey_data)
   ACTIVITY_LOG = [];
 }
 
@@ -351,7 +362,7 @@ function BackToGame() {
   document.getElementById('myForm').style.display = 'none';
   wrapper.style.display = 'block';
   clear_sel();
-  ACTIVITY_LOG.push([id, attempt, 'NEW', '0', performance.now()]);
+  ACTIVITY_LOG.push([id, attempt, 'NEW', '0', performance.now().toString()]);
   if (round == 21) {
     // 20 rounds total
     window.alert('SESSION DONE');
