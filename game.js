@@ -188,14 +188,14 @@ function new_target() {
   if (turn == 20) {
     var audio = new Audio('Sounds/finish.mp3');
     audio.play();
-    window.alert('Round Finished');
     clearTimeout(A);
     document.removeEventListener('keydown', buttonGotPressed);
     round_scores = estimate_scores(user_response, EXPECTED, user_movement);
+    window.alert("You got " + cpoints.toString() + ' points!!! \n Well Done!!!');
 
     if (practice == 0) {
       show_likert();
-      document.getElementById('totalb').style.left = scores[5] + 'px';
+      document.getElementById('totalb').style.left = scores[5]/2.0 + 'px';
       document.getElementById('score1b').style.left = scores[0] + 'px';
       document.getElementById('score2b').style.left = scores[1] + 'px';
       document.getElementById('score3b').style.left = scores[2] + 'px';
@@ -232,39 +232,44 @@ function new_target() {
 function get_survey_data() {
   var q1 = document.getElementsByName('difficulty');
   var v1 = 0;
-  for (var i = 0; i < q1.length; i++)
+  for (var i = 0; i < q1.length; i++){
     if (q1[i].checked) {
       v1 = q1[i].value;
       var i1 = i;
     }
+  }
   var q2 = document.getElementsByName('performance');
   var v2 = 0;
-  for (var i = 0; i < q2.length; i++)
+  for (var i = 0; i < q2.length; i++){
     if (q2[i].checked) {
       v2 = q2[i].value;
       var i2 = i;
     }
+  }
   var q3 = document.getElementsByName('engagement');
   var v3 = 0;
-  for (var i = 0; i < q3.length; i++)
+  for (var i = 0; i < q3.length; i++){
     if (q3[i].checked) {
       v3 = q3[i].value;
       var i3 = i;
     }
+  }
   var q4 = document.getElementsByName('preference');
   var v4 = 0;
-  for (var i = 0; i < q4.length; i++)
+  for (var i = 0; i < q4.length; i++){
     if (q4[i].checked) {
       v4 = q4[i].value;
       var i4 = i;
     }
+  }
   var q5 = document.getElementsByName('rules');
   var v5 = 0;
-  for (var i = 0; i < q5.length; i++)
+  for (var i = 0; i < q5.length; i++){
     if (q5[i].checked) {
       v5 = q5[i].value;
       var i5 = i;
     }
+  }
 
   if (v1 && v2 && v3 && v4 && v5) {
     q1[i1].checked = 0;
@@ -304,18 +309,19 @@ function push_data() {
   // ACTIVIITY -- [id, attempt, activity, status, timestamp]
   //console.log(ACTIVITY_LOG); // array - add to collection (activity_log)
   //console.log(session_data); // object - add to collection (session_data)
+  log_data = []; 
   ACTIVITY_LOG.forEach(function(entry){
-	  var log_data = {
+	  var log_object = {
 		  id: id,
 		  attempt: attempt -1,
 		  activity: entry[2], 
 		  status: entry[3], 
 		  timestamp: entry[4],		
-	  };
-	  postLog(log_data);
+	  };  
+	  log_data.push(log_object); 
   });
+  postManyLog(log_data);
   postSession(session_data);
-  
   if (practice == 0) postSurvey(survey_data); // object - add to collection if not practice (session_data OR survey_data)
   ACTIVITY_LOG = [];
 }

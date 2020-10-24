@@ -51,6 +51,22 @@ function postLog(logData) {
   postMutation('AddLog', AddLogQuery, variables);
 }
 
+function postManyLog(logData) {
+  const variables = {logs: logData};
+  const AddLogQuery =
+    'mutation AddManyLogs($logs: [Session_activity_logInsertInput!]!) { insertManySession_activity_logs(data: $logs) {insertedIds}}';
+
+  postMutation('AddManyLogs', AddLogQuery, variables);
+}
+
+function postPlayer(playerData) {
+  const variables = {plogin: playerData};
+  const AddPlayerQuery =
+    'mutation AddParticipant($plogin: PlayerInsertInput!){insertOnePlayer(data: $plogin) {id, age, gender, label }}';
+
+  postMutation('AddParticipant', AddPlayerQuery, variables);
+}
+
 function postMutation(operationName, query, variables) {
   fetch('https://realm.mongodb.com/api/client/v2.0/app/brainhoodgame-xdgsw/graphql', {
     method: 'POST',
@@ -67,10 +83,6 @@ function postMutation(operationName, query, variables) {
     });
 }
 
-// Generate uniqueID
-authenticate();
-id = Math.random().toString(36).substr(2, 5) + Date.now() + Math.random().toString(36).substr(2, 5) + Math.floor(Math.random() * 10) + Math.random().toString(36).substr(2, 5);
-
 function pause_game() {
   ACTIVITY_LOG.push([id, attempt, 'PAUSE', '0', performance.now().toString()]);
   closeNav();
@@ -78,18 +90,6 @@ function pause_game() {
   ACTIVITY_LOG.push([id, attempt, 'PAUSE', '1', performance.now().toString()]);
   //console.log(ACTIVITY_LOG);
 }
-
-// ACTIVITY LOG
-ACTIVITY_LOG = [[id, 0, 'NEW', '0', performance.now().toString()]];
-
-//  time spent on OLM buttons [total, t, t1, t2, t3, t4]
-olm_time = 0;
-//times_OLM   = [0,0,0,0,0,0];
-//start_times = [0,0,0,0,0];
-//end_times   = [0,0,0,0,0];
-
-// record task parameters and scores for SRL table
-table_entry = []; // round ID, T1 ,T2, T3, T4, Speed, Difficulty, Score, Points
 
 // SIDE NAVIGATION
 function openNav() {
@@ -164,6 +164,34 @@ function reset_table_background() {
   }
 }
 
+function start_session(){
+	// Generate uniqueID
+	authenticate();
+	id = Math.random().toString(36).substr(2, 5) + Date.now() + Math.random().toString(36).substr(2, 5) + Math.floor(Math.random() * 10) + Math.random().toString(36).substr(2, 5);
+	
+	var age = document.getElementById('age').value;
+	var genders = document.getElementsByName('gender');
+    var v = 0;
+    for (var i = 0; i < genders.length; i++){
+		if (genders[i].checked){
+			v = genders[i].value;
+		}
+	}
+	var comment = document.getElementById('comment').value;
+	var plogin = {
+		id: id, 
+		age: age, 
+		gender: v, 
+		label: comment	
+	};
+	postPlayer(plogin); 
+	document.getElementById("loginform").style.display = "none";
+	
+	ACTIVITY_LOG = [[id, 0, 'NEW', '0', performance.now().toString()]];
+	olm_time = 0;
+	table_entry = []; // round ID, T1 ,T2, T3, T4, Speed, Difficulty, Score, Points
+}
+
 // Get the modal
 var modal = document.getElementById('myModal');
 // Get the tutorial modal
@@ -182,7 +210,7 @@ btn.onclick = function () {
   OLM_START_TIME = performance.now();
   var temp = (Math.round(scores[5] * 10) / 10).toString();
   document.getElementById('tscore_text').innerHTML = 'My Score: ' + temp;
-  document.getElementById('total').width = scores[5];
+  document.getElementById('total').width = scores[5]/2.0;
   var temp = (Math.round(scores[0] * 10) / 10).toString();
   document.getElementById('s1_text').innerHTML = 'Move and Shoot: ' + temp;
   document.getElementById('score1').width = scores[0];
