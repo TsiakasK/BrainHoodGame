@@ -181,7 +181,7 @@ function start_session(){
 	var plogin = {
 		id: id, 
 		age: age, 
-		gender: v, 
+		gender: v.toString(), 
 		label: comment	
 	};
 	postPlayer(plogin); 
