@@ -192,6 +192,7 @@ function start_session(){
 	table_entry = []; // round ID, T1 ,T2, T3, T4, Speed, Difficulty, Score, Points
 }
 
+authenticate(); 
 // Get the modal
 var modal = document.getElementById('myModal');
 // Get the tutorial modal
