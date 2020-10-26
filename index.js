@@ -184,7 +184,8 @@ function start_session(){
 		gender: v.toString(), 
 		label: comment	
 	};
-	postPlayer(plogin); 
+	if (record)
+		postPlayer(plogin); 
 	document.getElementById("loginform").style.display = "none";
 	
 	ACTIVITY_LOG = [[id, 0, 'NEW', '0', performance.now().toString()]];
@@ -192,6 +193,12 @@ function start_session(){
 	table_entry = []; // round ID, T1 ,T2, T3, T4, Speed, Difficulty, Score, Points
 }
 
+function try_session(){
+	record = 0; 
+	start_session(); 
+}
+
+record = 1; 
 authenticate(); 
 // Get the modal
 var modal = document.getElementById('myModal');

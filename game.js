@@ -193,8 +193,7 @@ function new_target() {
     round_scores = estimate_scores(user_response, EXPECTED, user_movement);
     window.alert("You got " + cpoints.toString() + ' points!!! \n Well Done!!!');
 
-    if (practice == 0) {
-      show_likert();
+    if (practice == 0) { 
       document.getElementById('totalb').style.left = scores[5]/2.0 + 'px';
       document.getElementById('score1b').style.left = scores[0] + 'px';
       document.getElementById('score2b').style.left = scores[1] + 'px';
@@ -216,6 +215,17 @@ function new_target() {
       table_entry.push(te);
       updateTable(round, te);
       round++;
+	  if (record == 1)
+		show_likert();
+	  else {
+		survey_data = []; 
+		mygame.style.display = 'none';
+		document.getElementById('screen_prounds').innerHTML = 'Practice Rounds Played: ' + prounds;
+		survey_data = [];
+		push_data();
+		practice = 0;
+		BackToGame();
+		}
     } else {
       mygame.style.display = 'none';
       document.getElementById('screen_prounds').innerHTML = 'Practice Rounds Played: ' + prounds;
@@ -320,9 +330,11 @@ function push_data() {
 	  };  
 	  log_data.push(log_object); 
   });
-  postManyLog(log_data);
-  postSession(session_data);
-  if (practice == 0) postSurvey(survey_data); // object - add to collection if not practice (session_data OR survey_data)
+  if (record){
+	postManyLog(log_data);
+	postSession(session_data);
+	if (practice == 0) postSurvey(survey_data); // object - add to collection if not practice (session_data OR survey_data)
+  }
   ACTIVITY_LOG = [];
 }
 
