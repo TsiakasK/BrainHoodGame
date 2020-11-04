@@ -240,67 +240,54 @@ function new_target() {
 }
 
 function get_survey_data() {
-  var q1 = document.getElementsByName('difficulty');
-  var v1 = 0;
-  for (var i = 0; i < q1.length; i++){
-    if (q1[i].checked) {
-      v1 = q1[i].value;
-      var i1 = i;
-    }
-  }
-  var q2 = document.getElementsByName('performance');
-  var v2 = 0;
-  for (var i = 0; i < q2.length; i++){
-    if (q2[i].checked) {
-      v2 = q2[i].value;
-      var i2 = i;
-    }
-  }
-  var q3 = document.getElementsByName('engagement');
-  var v3 = 0;
-  for (var i = 0; i < q3.length; i++){
-    if (q3[i].checked) {
-      v3 = q3[i].value;
-      var i3 = i;
-    }
-  }
-  var q4 = document.getElementsByName('preference');
-  var v4 = 0;
-  for (var i = 0; i < q4.length; i++){
-    if (q4[i].checked) {
-      v4 = q4[i].value;
-      var i4 = i;
-    }
-  }
-  var q5 = document.getElementsByName('rules');
-  var v5 = 0;
-  for (var i = 0; i < q5.length; i++){
-    if (q5[i].checked) {
-      v5 = q5[i].value;
-      var i5 = i;
-    }
-  }
+	var diff = 0; 
+	var perf = 0; 
+	var	rules = 0;
+	var flow = 0;
+	
+	for(var i = 0; i < 5; i++){
+		var iid = "diff" + String(i+1);
+		var name = document.getElementById(iid).alt; 
+		if (document.getElementById(iid).alt == "checked")
+			diff = i+1;
+	}
+	
+	for(var i = 0; i < 5; i++){
+		var iid = "perf" + String(i+1);
+		var name = document.getElementById(iid).alt; 
+		if (document.getElementById(iid).alt == "checked")
+			perf = i+1;
+	}
+	
+	for(var i = 0; i < 3; i++){
+		var iid = "rules" + String(i+1);
+		var name = document.getElementById(iid).alt; 
+		if (document.getElementById(iid).alt == "checked")
+			rules = i+1;
+	}
+	
+	for(var i = 0; i < 5; i++){
+		var iid = "flow" + String(i+1);
+		var name = document.getElementById(iid).alt; 
+		if (document.getElementById(iid).alt == "checked")
+			flow = i+1;
+	}
 
-  if (v1 && v2 && v3 && v4 && v5) {
-    q1[i1].checked = 0;
-    q2[i2].checked = 0;
-    q3[i3].checked = 0;
-    q4[i4].checked = 0;
-    q5[i5].checked = 0;
-
-    survey_data = {
-      id: id,
-      round: round - 1,
-      difficulty: v1,
-      performance: v2,
-      engagement: v3,
-      preference: v4,
-      rules: v5,
-    };
-
-    push_data();
-    BackToGame();
-  } else window.alert('Please answer all questions');
+	if (diff && perf && rules && flow) {
+		// uncheck
+		
+		survey_data = {
+		  id: id,
+		  round: round - 1,
+		  difficulty: diff,
+		  performance: perf,
+		  engagement: flow,
+		  rules: rules
+		};
+		push_data();
+		BackToGame();
+	} else 
+		window.alert('Please answer all questions');
 }
 
 function push_data() {

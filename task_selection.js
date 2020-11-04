@@ -21,6 +21,45 @@ function clear_sel(){
 	document.getElementById('t3').src = "Images/t3.png";
 	document.getElementById('t4').alt = "unchecked";
 	document.getElementById('t4').src = "Images/t4.png";
+	
+	document.getElementById('perf1').alt = "unchecked"; 
+	document.getElementById('perf1').src = "Images/perf1.png";
+	document.getElementById('perf2').alt = "unchecked";
+	document.getElementById('perf2').src = "Images/perf2.png";
+	document.getElementById('perf3').alt = "unchecked";
+	document.getElementById('perf3').src = "Images/perf3.png";		
+	document.getElementById('perf4').alt = "unchecked";
+	document.getElementById('perf4').src = "Images/perf4.png";
+	document.getElementById('perf5').alt = "unchecked";
+	document.getElementById('perf5').src = "Images/perf5.png";
+	
+	document.getElementById('diff1').alt = "unchecked"; 
+	document.getElementById('diff1').src = "Images/diff1.png";
+	document.getElementById('diff2').alt = "unchecked";
+	document.getElementById('diff2').src = "Images/diff2.png";
+	document.getElementById('diff3').alt = "unchecked";
+	document.getElementById('diff3').src = "Images/diff3.png";		
+	document.getElementById('diff4').alt = "unchecked";
+	document.getElementById('diff4').src = "Images/diff4.png";
+	document.getElementById('diff5').alt = "unchecked";
+	document.getElementById('diff5').src = "Images/diff5.png";
+	document.getElementById('rules1').alt = "unchecked"; 
+	document.getElementById('rules1').src = "Images/rules1.png";
+	document.getElementById('rules2').alt = "unchecked";
+	document.getElementById('rules2').src = "Images/rules2.png";
+	document.getElementById('rules3').alt = "unchecked";
+	document.getElementById('rules3').src = "Images/rules3.png";
+	
+	document.getElementById('flow1').alt = "unchecked"; 
+	document.getElementById('flow1').src = "Images/flow1.png";
+	document.getElementById('flow2').alt = "unchecked";
+	document.getElementById('flow2').src = "Images/flow2.png";
+	document.getElementById('flow3').alt = "unchecked";
+	document.getElementById('flow3').src = "Images/flow3.png";		
+	document.getElementById('flow4').alt = "unchecked";
+	document.getElementById('flow4').src = "Images/flow4.png";
+	document.getElementById('flow5').alt = "unchecked";
+	document.getElementById('flow5').src = "Images/flow5.png";
 	olm_time = 0; 	
 }
 
@@ -41,6 +80,50 @@ function image_check(img){
 			document.getElementById('s2').src = "Images/s2.png";
 			document.getElementById('s3').alt = "unchecked";
 			document.getElementById('s3').src = "Images/s3.png";			
+		}
+		if ((img.id == "perf1") || (img.id == "perf2") || (img.id == "perf3") || (img.id == "perf4") || (img.id == "perf5")){
+			document.getElementById('perf1').alt = "unchecked"; 
+			document.getElementById('perf1').src = "Images/perf1.png";
+			document.getElementById('perf2').alt = "unchecked";
+			document.getElementById('perf2').src = "Images/perf2.png";
+			document.getElementById('perf3').alt = "unchecked";
+			document.getElementById('perf3').src = "Images/perf3.png";		
+			document.getElementById('perf4').alt = "unchecked";
+			document.getElementById('perf4').src = "Images/perf4.png";
+			document.getElementById('perf5').alt = "unchecked";
+			document.getElementById('perf5').src = "Images/perf5.png";			
+		}
+		if ((img.id == "diff1") || (img.id == "diff2") || (img.id == "diff3") || (img.id == "diff4") || (img.id == "diff5")){
+			document.getElementById('diff1').alt = "unchecked"; 
+			document.getElementById('diff1').src = "Images/diff1.png";
+			document.getElementById('diff2').alt = "unchecked";
+			document.getElementById('diff2').src = "Images/diff2.png";
+			document.getElementById('diff3').alt = "unchecked";
+			document.getElementById('diff3').src = "Images/diff3.png";		
+			document.getElementById('diff4').alt = "unchecked";
+			document.getElementById('diff4').src = "Images/diff4.png";
+			document.getElementById('diff5').alt = "unchecked";
+			document.getElementById('diff5').src = "Images/diff5.png";			
+		}
+		if ((img.id == "rules1") || (img.id == "rules2") || (img.id == "rules3")){
+			document.getElementById('rules1').alt = "unchecked"; 
+			document.getElementById('rules1').src = "Images/rules1.png";
+			document.getElementById('rules2').alt = "unchecked";
+			document.getElementById('rules2').src = "Images/rules2.png";
+			document.getElementById('rules3').alt = "unchecked";
+			document.getElementById('rules3').src = "Images/rules3.png";					
+		}
+		if ((img.id == "flow1") || (img.id == "flow2") || (img.id == "flow3") || (img.id == "flow4") || (img.id == "flow5")){
+			document.getElementById('flow1').alt = "unchecked"; 
+			document.getElementById('flow1').src = "Images/flow1.png";
+			document.getElementById('flow2').alt = "unchecked";
+			document.getElementById('flow2').src = "Images/flow2.png";
+			document.getElementById('flow3').alt = "unchecked";
+			document.getElementById('flow3').src = "Images/flow3.png";		
+			document.getElementById('flow4').alt = "unchecked";
+			document.getElementById('flow4').src = "Images/flow4.png";
+			document.getElementById('flow5').alt = "unchecked";
+			document.getElementById('flow5').src = "Images/flow5.png";			
 		}
 		img.src = "Images/" + img.id + "_checked.png"; 
 		img.alt = "checked"

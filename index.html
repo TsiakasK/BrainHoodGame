@@ -492,42 +492,85 @@
 	<script type= "text/javascript" src="task_selection.js"></script>
 	<script type= "text/javascript" src="game.js"></script>
 
-	<div class="form-popup" id="myForm">
-	<form action="#">
-		<h1>Round Finished!!!</h1>
-		<br><br>
-		<b>The task was:&nbsp &nbsp</b> 
-		<input type="radio" name="difficulty" value="1"> Too Easy&nbsp 
-		<input type="radio" name="difficulty" value="2"> Easy&nbsp 
-		<input type="radio" name="difficulty" value="3"> OK&nbsp  
-		<input type="radio" name="difficulty" value="4"> Difficult&nbsp 	
-		<input type="radio" name="difficulty" value="5"> Too Difficult&nbsp 
-		<br><br><br>
-		<b>I think that my performance was:&nbsp &nbsp </b>
-		<input type="radio" name="performance" value="1"> Bad &nbsp  
-		<input type="radio" name="performance" value="2"> Not Good&nbsp 
-		<input type="radio" name="performance" value="3"> OK &nbsp 
-		<input type="radio" name="performance" value="4"> Pretty Good &nbsp 
-		<input type="radio" name="performance" value="5"> Great&nbsp 
-		<br><br><br>
-		<b>During the task I felt:&nbsp &nbsp  </b>
-		<input type="radio" name="engagement" value="1"> Stressed &nbsp  
-		<input type="radio" name="engagement" value="2"> Engaged&nbsp 
-		<input type="radio" name="engagement" value="3"> Bored&nbsp 
-		<br><br><br>		
-		<b>I really liked this task!&nbsp &nbsp  </b>
-		<input type="radio" name="preference" value="1"> Not at all &nbsp  
-		<input type="radio" name="preference" value="2"> It was OK&nbsp 
-		<input type="radio" name="preference" value="3"> Yes&nbsp 
-		<br><br><br>	
-		<b>I did understood the rules! &nbsp &nbsp </b>
-		<input type="radio" name="rules" value="1"> Not at all  &nbsp 
-		<input type="radio" name="rules" value="2"> Not Sure&nbsp 
-		<input type="radio" name="rules" value="3"> Yes&nbsp 
-	</form>
-	<br><br>
-    <span class='start-btn' onClick="get_survey_data();" width: 160px;"> Next!!! </span>
+	<div class="form-popup" id="myForm" style="padding-top: 10px; padding-left: 10px; ">
 	
-	</div>
+		<div id="survey_parameters">
+			<div id="survey_difficulty">
+				<h3>The task was: </h3>
+				<div class="container" style="width:20%">
+					<img id="diff1" src="Images/diff1.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="diff2" src="Images/diff2.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="diff3" src="Images/diff3.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="diff4" src="Images/diff4.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="diff5" src="Images/diff5.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+			</div>
+			<div id="survey_performance">
+				<h3>My perfomance at the task was: </h3>
+				<div class="container" style="width:20%">
+					<img id="perf1" src="Images/perf1.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="perf2" src="Images/perf2.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="perf3" src="Images/perf3.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="perf4" src="Images/perf4.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="perf5" src="Images/perf5.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+			</div>	
+			<div id="survey_rules">	
+				<h3>I understood the task rules: </h3>
+				<div class="container" style="width:20%">
+					<img src="Images/blank.png" class="image" style="width:100%">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="rules1" src="Images/rules1.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="rules2" src="Images/rules2.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="rules3" src="Images/rules3.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img src="Images/blank.png" class="image" style="width:100%">
+				</div>
+			</div>			
+			<div id="survey_flow">	
+				<h3>During the task, I felt: </h3>
+				<div class="container" style="width:20%">
+					<img id="flow1" src="Images/flow1.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="flow2" src="Images/flow2.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="flow3" src="Images/flow3.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="flow4" src="Images/flow4.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+				<div class="container" style="width:20%">
+					<img id="flow5" src="Images/flow5.png" alt="unchecked" class="image" style="width:100%" onClick="image_check(this);">
+				</div>
+			</div>
+			<div id = "buttons1" style="clear: left; float: left; padding-top: 15px;">
+				<span class='start-btn' style="display: left" onClick="get_survey_data();"> Next!!! </span>	
+			</div>			
+		</div>
+	</div>	
 	</body>
 </html>

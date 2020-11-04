@@ -9,10 +9,23 @@
 	position: absolute; 
 }
 
+#wrapper2{
+	display: block;
+	position: absolute; 
+}
+
 #task_parameters{
 	display: block;
 	position: relative; 
 	width: 40%; /* full window width */
+	float: left;
+}
+
+#survey_parameters{
+	display: block;
+	position: relative; 
+	width: 80%; /* full window width */
+	height: 100;
 	float: left;
 }
 
@@ -34,6 +47,37 @@
 	display: block;
 	float: left;
 	width: 85%; /* full window width */
+	position:relative;
+}
+
+#survey_difficulty{
+	display: block;
+	position: relative; 
+	width: 40%; /* full window width */
+	float: left;
+}
+
+#survey_performance{
+	clear: left;
+	display: block;
+	float: left; 
+	width: 40%; /* full window width */
+	position:relative;
+}
+
+#survey_rules{
+	clear: left;
+	display: block;
+	float: left; 
+	width: 40%; /* full window width */
+	position:relative;
+}
+
+#survey_flow{
+	clear: left;
+	display: block;
+	float: left;
+	width: 40%; /* full window width */
 	position:relative;
 }
 
@@ -114,6 +158,12 @@
   float: left; 
 }
 
+.container2 {
+  position: relative;
+  width: 35%;
+  float: left; 
+}
+
 .image {
   opacity: 1;
   display: block;
@@ -139,6 +189,10 @@
 }
 
 .container:hover .image {
+  opacity: 0.3;
+}
+
+.container2:hover .image {
   opacity: 0.3;
 }
 
