@@ -1,52 +1,52 @@
 // new
 function loadImages() {
-  GplayerImage = new Image();
-  GplayerImage.src = 'Images/green_player.png';
-
-  RplayerImage = new Image();
-  RplayerImage.src = 'Images/red_player.png';
-
-  LbirdImage = new Image();
-  LbirdImage.src = 'Images/left_bird.png';
-
-  RbirdImage = new Image();
-  RbirdImage.src = 'Images/right_bird.png';
-
-  RappleImage = new Image();
-  RappleImage.src = 'Images/red_apple.png';
-
-  GappleImage = new Image();
-  GappleImage.src = 'Images/green_apple.png';
-
-  arrowImage = new Image();
-  arrowImage.src = 'Images/arrow.png';
-
-  correctImage = new Image();
-  correctImage.src = 'Images/correct.png';
-
-  wrongImage = new Image();
-  wrongImage.src = 'Images/wrong.png';
-
-  baseImage1 = new Image();
-  baseImage1.src = 'Images/b1.png';
-
-  baseImage2 = new Image();
-  baseImage2.src = 'Images/b2.png';
-
-  baseImage3 = new Image();
-  baseImage3.src = 'Images/b3.png';
-
-  baseImage4 = new Image();
-  baseImage4.src = 'Images/b4.png';
-
-  baseImage5 = new Image();
-  baseImage5.src = 'Images/b5.png';
-
-  baseImage6 = new Image();
-  baseImage6.src = 'Images/b6.png';
-
-  baseImage7 = new Image();
-  baseImage7.src = 'Images/b7.png';
+	GplayerImage = new Image();
+	RplayerImage = new Image();
+	LbirdImage = new Image();
+	RbirdImage = new Image();
+	RappleImage = new Image();
+	GappleImage = new Image();
+	arrowImage = new Image();
+	correctImage = new Image();
+	wrongImage = new Image();
+	baseImage1 = new Image();
+	baseImage2 = new Image();
+	baseImage3 = new Image();
+	baseImage4 = new Image();
+	baseImage5 = new Image();
+	baseImage6 = new Image();
+	baseImage7 = new Image();
+	
+	if (rules[0] == 0){
+		GplayerImage.src = 'Images/gplayer.png';
+		RplayerImage.src = 'Images/rplayer.png';
+		baseImage1.src = 'Images/b1.png';
+		baseImage2.src = 'Images/b2.png';
+		baseImage3.src = 'Images/b3.png';
+		baseImage4.src = 'Images/b4.png';
+		baseImage5.src = 'Images/b5.png';
+		baseImage6.src = 'Images/b6.png';
+		baseImage7.src = 'Images/b7.png';
+	}
+	else{
+		GplayerImage.src = 'Images/green_player.png';
+		RplayerImage.src = 'Images/red_player.png';
+		baseImage1.src = 'Images/b1b.png';
+		baseImage2.src = 'Images/b2b.png';
+		baseImage3.src = 'Images/b3b.png';
+		baseImage4.src = 'Images/b4b.png';
+		baseImage5.src = 'Images/b5b.png';
+		baseImage6.src = 'Images/b6b.png';
+		baseImage7.src = 'Images/b7b.png';
+	}
+	
+	LbirdImage.src = 'Images/left_bird.png';
+	RbirdImage.src = 'Images/right_bird.png';
+	RappleImage.src = 'Images/red_apple.png';
+	GappleImage.src = 'Images/green_apple.png';
+	arrowImage.src = 'Images/arrow.png';
+	correctImage.src = 'Images/correct.png';
+	wrongImage.src = 'Images/wrong.png';
 }
 
 function set_params() {
@@ -55,13 +55,13 @@ function set_params() {
 
   stimuli_speed = -1;
   if (sel_params[4] == 1) {
-    stimuli_speed = 3000;
+    stimuli_speed = 3500;
     speed_factor = 0.7;
   } else if (sel_params[4] == 2) {
-    stimuli_speed = 2500;
+    stimuli_speed = 3000;
     speed_factor = 0.8;
   } else if (sel_params[4] == 3) {
-    stimuli_speed = 2000;
+    stimuli_speed = 2500;
     speed_factor = 1;
   }
 
@@ -73,13 +73,13 @@ function set_params() {
   if (sel_params[5] == 1) {
     spot_min = 3;
     spot_max = 5;
-    diff_factor = 0.5;
+    diff_factor = 0.7;
     bases = [3, 4, 5];
   }
   if (sel_params[5] == 2) {
     spot_min = 2;
     spot_max = 6;
-    diff_factor = 0.75;
+    diff_factor = 0.8;
     bases = [2, 3, 4, 5, 6];
   }
   if (sel_params[5] == 3) {
@@ -455,27 +455,28 @@ function init() {
 }
 
 function draw_bases() {
-  if (bases.length == 3) {
-    pen.drawImage(baseImage1, 2 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-    pen.drawImage(baseImage2, 3 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-    pen.drawImage(baseImage3, 4 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-  }
-  if (bases.length == 5) {
-    pen.drawImage(baseImage1, 1 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-    pen.drawImage(baseImage2, 2 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-    pen.drawImage(baseImage3, 3 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-    pen.drawImage(baseImage4, 4 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-    pen.drawImage(baseImage5, 5 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-  }
-  if (bases.length == 7) {
-    pen.drawImage(baseImage1, 0 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-    pen.drawImage(baseImage2, 1 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-    pen.drawImage(baseImage3, 2 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-    pen.drawImage(baseImage4, 3 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-    pen.drawImage(baseImage5, 4 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-    pen.drawImage(baseImage6, 5 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-    pen.drawImage(baseImage7, 6 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
-  }
+	if (bases.length == 3) {		
+		pen.drawImage(baseImage1, 2 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		pen.drawImage(baseImage2, 3 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		pen.drawImage(baseImage3, 4 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		
+	}
+	if (bases.length == 5) {
+		pen.drawImage(baseImage1, 1 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		pen.drawImage(baseImage2, 2 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		pen.drawImage(baseImage3, 3 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		pen.drawImage(baseImage4, 4 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		pen.drawImage(baseImage5, 5 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+	}
+	if (bases.length == 7) {
+		pen.drawImage(baseImage1, 0 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		pen.drawImage(baseImage2, 1 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		pen.drawImage(baseImage3, 2 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		pen.drawImage(baseImage4, 3 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		pen.drawImage(baseImage5, 4 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		pen.drawImage(baseImage6, 5 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+		pen.drawImage(baseImage7, 6 * (0.15 * W), 0.76 * H, 0.1 * W, 0.25 * H);
+	}
 }
 
 // Listener for events
